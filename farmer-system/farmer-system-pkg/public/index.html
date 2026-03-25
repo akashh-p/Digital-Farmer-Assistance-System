@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Digital Farmer Assistance System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --earth:#2D4A1E;--leaf:#4A7C31;--sprout:#7BBF4E;--gold:#D4A017;--amber:#F0C040;
+  --sky:#4A90D9;--cream:#FAF7F0;--warm:#F5EDD8;--ink:#1A1A14;--muted:#6B7560;
+  --border:#DDD5C0;--danger:#C0392B;--shadow:0 4px 24px rgba(45,74,30,.12);--rad:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;display:flex}
+
+/* AUTH */
+#auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;width:100%;background:linear-gradient(135deg,var(--earth) 0%,var(--leaf) 60%,var(--sprout) 100%)}
+.auth-box{background:#fff;border-radius:20px;padding:40px;width:390px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.auth-box h1{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--earth);text-align:center;margin-bottom:4px}
+.auth-box .tagline{text-align:center;color:var(--muted);font-size:.8rem;margin-bottom:26px}
+.tab-row{display:flex;margin-bottom:22px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.tab-btn{flex:1;padding:9px;background:transparent;border:none;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:.85rem;color:var(--muted);transition:.2s}
+.tab-btn.active{background:var(--earth);color:#fff;font-weight:500}
+.role-row{display:flex;gap:8px;margin-bottom:16px}
+.role-btn{flex:1;padding:8px;border:1px solid var(--border);border-radius:7px;cursor:pointer;font-size:.82rem;background:transparent;color:var(--muted);transition:.2s}
+.role-btn.active{border-color:var(--leaf);background:#E8F5E0;color:var(--earth);font-weight:500}
+
+/* SIDEBAR */
+#sidebar{width:230px;min-height:100vh;background:var(--earth);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100}
+.logo{padding:24px 18px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.logo h1{font-family:'Playfair Display',serif;color:var(--amber);font-size:1.1rem;line-height:1.3}
+.logo span{color:var(--sprout);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;display:block;margin-top:4px}
+nav{flex:1;padding:14px 0;overflow-y:auto}
+.ns{font-size:.6rem;letter-spacing:2px;color:rgba(255,255,255,.35);padding:10px 18px 4px;text-transform:uppercase}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 18px;cursor:pointer;color:rgba(255,255,255,.7);font-size:.85rem;transition:.2s;border-left:3px solid transparent}
+.ni:hover{background:rgba(255,255,255,.06);color:#fff}
+.ni.active{background:rgba(123,191,78,.15);color:var(--sprout);border-left-color:var(--sprout)}
+.ni .ic{font-size:.95rem;width:18px;text-align:center}
+.user-pill{margin:14px;padding:10px 12px;background:rgba(255,255,255,.08);border-radius:8px;font-size:.78rem;color:rgba(255,255,255,.6)}
+.user-pill strong{color:#fff;display:block;margin-bottom:2px}
+.logout-btn{margin:0 14px 14px;padding:8px;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.4);border-radius:7px;color:#f8b4ae;font-size:.8rem;cursor:pointer;width:calc(100% - 28px);font-family:'IBM Plex Sans',sans-serif;transition:.2s}
+.logout-btn:hover{background:rgba(192,57,43,.4);color:#fff}
+
+/* MAIN */
+#main{margin-left:230px;flex:1;padding:28px;min-height:100vh}
+.page{display:none}.page.active{display:block}
+.page-header{margin-bottom:24px}
+.page-header h2{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--earth)}
+.page-header p{color:var(--muted);font-size:.85rem;margin-top:4px}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:#fff;border-radius:var(--rad);padding:18px;border:1px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--sprout)}
+.stat-card.gold::before{background:var(--gold)}.stat-card.sky::before{background:var(--sky)}.stat-card.danger::before{background:var(--danger)}
+.stat-card .lbl{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.stat-card .val{font-family:'IBM Plex Mono',monospace;font-size:1.9rem;font-weight:500;color:var(--earth);margin-top:4px}
+.stat-card .sub{font-size:.72rem;color:var(--muted);margin-top:2px}
+
+/* TABLE */
+.tw{background:#fff;border-radius:var(--rad);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow);margin-bottom:20px}
+.th{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+.th h3{font-size:.92rem;font-weight:600;color:var(--earth)}
+table{width:100%;border-collapse:collapse}
+thead tr{background:var(--warm)}
+th{padding:9px 14px;text-align:left;font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600}
+td{padding:11px 14px;font-size:.83rem;border-top:1px solid var(--border)}
+tr:hover td{background:#fafaf7}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:500}
+.badge.green{background:#E8F5E0;color:#2D6A1A}.badge.amber{background:#FFF3D0;color:#8A6000}
+.badge.red{background:#FFE8E8;color:#8A1A1A}.badge.blue{background:#E0EDFF;color:#1A3A8A}
+
+/* FORM */
+.fc{background:#fff;border-radius:var(--rad);border:1px solid var(--border);padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
+.fc h3{font-size:.92rem;font-weight:600;color:var(--earth);margin-bottom:16px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.fr.full{grid-template-columns:1fr}
+label{display:block;font-size:.72rem;font-weight:500;color:var(--muted);margin-bottom:4px;letter-spacing:.4px;text-transform:uppercase}
+input,select,textarea{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:7px;font-family:'IBM Plex Sans',sans-serif;font-size:.85rem;color:var(--ink);background:var(--cream);transition:.2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--leaf);box-shadow:0 0 0 3px rgba(74,124,49,.15)}
+textarea{resize:vertical;min-height:75px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:7px;border:none;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:.83rem;font-weight:500;transition:.2s}
+.btn-primary{background:var(--leaf);color:#fff}.btn-primary:hover{background:var(--earth)}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#b88a00}
+.btn-sky{background:var(--sky);color:#fff}.btn-sky:hover{background:#2c6fb5}
+.btn-sm{padding:4px 11px;font-size:.76rem}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--leaf);color:var(--leaf)}
+.btn-danger{background:var(--danger);color:#fff}
+
+/* WEATHER CARDS */
+.wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px;margin-bottom:22px}
+.wc{background:linear-gradient(135deg,var(--earth) 0%,var(--leaf) 100%);border-radius:var(--rad);padding:18px;color:#fff;box-shadow:var(--shadow)}
+.wc.extreme{background:linear-gradient(135deg,#7A0000 0%,var(--danger) 100%)}
+.wc .loc{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;opacity:.7}
+.wc .temp{font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:500;margin:6px 0 4px}
+.wc .cond{font-size:.8rem;opacity:.9;font-weight:500}
+.wc .extra{font-size:.72rem;opacity:.65;margin-top:8px}
+.wc .src-tag{display:inline-block;font-size:.6rem;background:rgba(255,255,255,.15);padding:2px 7px;border-radius:4px;margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+.wc.extreme .src-tag{background:rgba(255,255,255,.2)}
+
+/* API KEY PANEL */
+.api-panel{background:linear-gradient(135deg,#EEF7FF,#D8EDFF);border:1px solid #B3D4F5;border-radius:var(--rad);padding:18px;margin-bottom:18px}
+.api-panel h4{color:#1A3A8A;font-size:.88rem;font-weight:600;margin-bottom:6px}
+.api-panel p{font-size:.78rem;color:#2C5282;margin-bottom:12px;line-height:1.5}
+.api-panel .api-row{display:flex;gap:8px;align-items:flex-end}
+.api-panel input{flex:1;background:#fff}
+.api-status{font-size:.75rem;margin-top:8px;padding:5px 10px;border-radius:5px;display:inline-block}
+.api-status.ok{background:#E8F5E0;color:#2D6A1A}
+.api-status.demo{background:#FFF3D0;color:#8A6000}
+
+/* ALERTS */
+.alert{padding:11px 14px;border-radius:8px;margin-bottom:14px;font-size:.83rem;display:flex;gap:9px;align-items:flex-start}
+.alert-warn{background:#FFF3CD;border-left:4px solid var(--gold);color:#7A5C00}
+.alert-danger{background:#FFE0E0;border-left:4px solid var(--danger);color:#7A0000}
+.alert-success{background:#E8F5E0;border-left:4px solid var(--sprout);color:#2D6A1A}
+.alert-info{background:#E0EDFF;border-left:4px solid var(--sky);color:#1A3A8A}
+
+/* PRICE CHANGE */
+.up-arrow{color:#2D6A1A;font-weight:600}.dn-arrow{color:var(--danger);font-weight:600}
+
+/* MODAL */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;justify-content:center;align-items:center}
+.mbg.open{display:flex}
+.modal{background:#fff;border-radius:var(--rad);padding:26px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--earth);margin-bottom:16px}
+.mf{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+
+/* TOAST */
+#toast{position:fixed;bottom:22px;right:22px;background:var(--earth);color:#fff;padding:11px 18px;border-radius:8px;font-size:.83rem;z-index:9999;transform:translateY(70px);opacity:0;transition:.3s ease;box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:320px}
+#toast.show{transform:translateY(0);opacity:1}
+#toast.err{background:var(--danger)}
+
+.loading{text-align:center;padding:32px;color:var(--muted);font-size:.85rem}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--border)}
+.price-row:last-child{border:none}
+.qitem{padding:11px 0;border-bottom:1px dashed var(--border)}.qitem:last-child{border:none}
+.response-box{background:var(--warm);border-radius:8px;padding:10px;margin-top:8px;font-size:.82rem;border-left:3px solid var(--sprout);line-height:1.5}
+.adv-card{background:#fff;border-radius:var(--rad);border:1px solid var(--border);padding:20px;box-shadow:var(--shadow);margin-bottom:14px}
+.adv-card p{font-size:.88rem;line-height:1.65;color:var(--ink);margin-top:10px}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <h1>🌾 Farmer Assist</h1>
+    <p class="tagline">Digital Farmer Assistance System</p>
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchAuthTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchAuthTab('register')">Register</button>
+    </div>
+    <!-- LOGIN -->
+    <div id="auth-login">
+      <div class="role-row">
+        <button class="role-btn active" id="role-farmer" onclick="setRole('farmer')">👨‍🌾 Farmer</button>
+        <button class="role-btn" id="role-admin" onclick="setRole('admin')">🔐 Admin</button>
+      </div>
+      <div id="login-farmer-fields">
+        <div style="margin-bottom:12px"><label>Phone Number</label><input id="l-phone" placeholder="9876543210" type="tel"/></div>
+      </div>
+      <div id="login-admin-fields" style="display:none">
+        <div style="margin-bottom:12px"><label>Email Address</label><input id="l-email" type="email" placeholder="ravi@farmerassist.in"/></div>
+      </div>
+      <div style="margin-bottom:18px"><label>Password</label><input id="l-pass" type="password" placeholder="••••••••"/></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" onclick="doLogin()">Login</button>
+      <div style="margin-top:14px;padding:10px;background:var(--warm);border-radius:8px;font-size:.75rem;color:var(--muted)">
+        <strong style="color:var(--earth)">Demo credentials</strong><br>
+        Farmer: 9876543210 / farmer123<br>
+        Admin: ravi@farmerassist.in / admin123
+      </div>
+    </div>
+    <!-- REGISTER -->
+    <div id="auth-register" style="display:none">
+      <div class="fr">
+        <div><label>Full Name</label><input id="r-name" placeholder="Your name"/></div>
+        <div><label>Phone</label><input id="r-phone" placeholder="9876543210" type="tel"/></div>
+      </div>
+      <div class="fr">
+        <div><label>Region / District</label><input id="r-region" placeholder="e.g. Thrissur"/></div>
+        <div><label>Language</label>
+          <select id="r-lang">
+            <option value="en">English</option>
+            <option value="ml">Malayalam</option>
+            <option value="hi">Hindi</option>
+            <option value="ta">Tamil</option>
+          </select>
+        </div>
+      </div>
+      <div class="fr">
+        <div><label>Preferred Crops</label><input id="r-crops" placeholder="Rice,Coconut"/></div>
+        <div><label>Password</label><input id="r-pass" type="password" placeholder="••••••••"/></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px" onclick="doRegister()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;width:100%">
+<aside id="sidebar">
+  <div class="logo">
+    <h1>🌾 Farmer<br>Assist</h1>
+    <span>Digital Agriculture</span>
+  </div>
+  <nav>
+    <div class="ns">Overview</div>
+    <div class="ni active" onclick="show('dashboard')"><span class="ic">📊</span>Dashboard</div>
+    <div class="ns farmer-only">For Me</div>
+    <div class="ni farmer-only" onclick="show('myadvisory')"><span class="ic">🌱</span>My Advisories</div>
+    <div class="ni farmer-only" onclick="show('myqueries')"><span class="ic">💬</span>My Queries</div>
+    <div class="ns">Information</div>
+    <div class="ni" onclick="show('market')"><span class="ic">📈</span>Market Prices</div>
+    <div class="ni" onclick="show('weather')"><span class="ic">🌤</span>Weather</div>
+    <div class="ni" onclick="show('advisory')"><span class="ic">📋</span>Advisories</div>
+    <div class="ns admin-only">Admin</div>
+    <div class="ni admin-only" onclick="show('farmers')"><span class="ic">👨‍🌾</span>Farmers</div>
+    <div class="ni admin-only" onclick="show('queries')"><span class="ic">💬</span>All Queries</div>
+    <div class="ni admin-only" onclick="show('settings')"><span class="ic">⚙️</span>Settings</div>
+  </nav>
+  <div class="user-pill">
+    <strong id="sb-name">—</strong>
+    <span id="sb-role">—</span>
+  </div>
+  <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+</aside>
+
+<main id="main">
+
+  <!-- DASHBOARD -->
+  <section class="page active" id="page-dashboard">
+    <div class="page-header"><h2>Dashboard</h2><p>Real-time agricultural data overview</p></div>
+    <div id="dash-alerts"></div>
+    <div class="cards">
+      <div class="stat-card"><div class="lbl">Registered Farmers</div><div class="val" id="d-farmers">—</div><div class="sub">Across Kerala</div></div>
+      <div class="stat-card gold"><div class="lbl">Price Records</div><div class="val" id="d-prices">—</div><div class="sub">Crop markets</div></div>
+      <div class="stat-card sky"><div class="lbl">Active Advisories</div><div class="val" id="d-adv">—</div><div class="sub">Season-specific</div></div>
+      <div class="stat-card danger"><div class="lbl">Pending Queries</div><div class="val" id="d-pq">—</div><div class="sub">Awaiting response</div></div>
+    </div>
+    <div class="two-col">
+      <div class="tw" style="padding:18px"><h3 style="margin-bottom:12px;font-weight:600;color:var(--earth)">📈 Market Prices</h3><div id="dash-prices"><div class="loading">Loading...</div></div></div>
+      <div class="tw" style="padding:18px"><h3 style="margin-bottom:12px;font-weight:600;color:var(--earth)">🌤 Weather Today</h3><div id="dash-weather"><div class="loading">Loading...</div></div></div>
+    </div>
+  </section>
+
+  <!-- MY ADVISORIES -->
+  <section class="page" id="page-myadvisory">
+    <div class="page-header"><h2>My Crop Advisories</h2><p>Guidance tailored to your preferred crops</p></div>
+    <div id="my-adv-list"><div class="loading">Loading...</div></div>
+  </section>
+
+  <!-- MY QUERIES -->
+  <section class="page" id="page-myqueries">
+    <div class="page-header"><h2>My Queries</h2><p>Ask agricultural experts a question</p></div>
+    <div class="fc">
+      <h3>📝 Submit a New Query</h3>
+      <div class="fr full"><div><label>Subject</label><input id="fq-subject" placeholder="e.g. Pest attack on rice crop"/></div></div>
+      <div class="fr full"><div><label>Description</label><textarea id="fq-desc" placeholder="Describe your issue in detail..."></textarea></div></div>
+      <button class="btn btn-primary" onclick="submitFarmerQuery()">Submit Query</button>
+    </div>
+    <div class="tw">
+      <div class="th"><h3>My Submitted Queries</h3></div>
+      <table><thead><tr><th>Subject</th><th>Status</th><th>Date</th><th>Expert Response</th></tr></thead>
+      <tbody id="fq-tbody"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <!-- MARKET -->
+  <section class="page" id="page-market">
+    <div class="page-header"><h2>Market Prices</h2><p>Regional crop prices — updated daily by admins</p></div>
+    <div class="fc admin-only">
+      <h3>➕ Add / Update Price</h3>
+      <div class="fr">
+        <div><label>Crop Name</label><input id="mp-crop" placeholder="e.g. Rice"/></div>
+        <div><label>Price (₹/kg)</label><input id="mp-price" type="number" step="0.01" placeholder="22.50"/></div>
+      </div>
+      <div class="fr">
+        <div><label>Source Market (APMC)</label><input id="mp-market" placeholder="e.g. Thrissur APMC"/></div>
+        <div><label>State</label><input id="mp-state" placeholder="Kerala" value="Kerala"/></div>
+      </div>
+      <button class="btn btn-gold" onclick="addPrice()">Save Price</button>
+    </div>
+    <div class="tw">
+      <div class="th"><h3>All Market Price Records</h3><button class="btn btn-ghost btn-sm" onclick="loadMarket()">↻ Refresh</button></div>
+      <table><thead><tr><th>Crop</th><th>Price (₹/kg)</th><th>Change</th><th>Market</th><th>State</th><th>Updated</th><th class="admin-only">Del</th></tr></thead>
+      <tbody id="market-tbody"><tr><td colspan="7" class="loading">Loading...</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <!-- WEATHER -->
+  <section class="page" id="page-weather">
+    <div class="page-header"><h2>Weather Forecasts</h2><p>Live data via OpenWeatherMap — or set your API key below</p></div>
+
+    <!-- API KEY PANEL -->
+    <div class="api-panel" id="api-key-panel">
+      <h4>🔑 OpenWeatherMap API Key</h4>
+      <p>Get a free key at <strong>openweathermap.org</strong> (free tier, no credit card). Paste it here to get live weather for any location you search.</p>
+      <div class="api-row">
+        <input type="text" id="owm-key-input" placeholder="Paste your API key here..."/>
+        <button class="btn btn-sky btn-sm" onclick="saveApiKey()">Save Key</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearApiKey()">Clear</button>
+      </div>
+      <div id="api-key-status"></div>
+    </div>
+
+    <!-- SEARCH BY LOCATION -->
+    <div class="fc">
+      <h3>🔍 Search Weather by Location</h3>
+      <div class="fr">
+        <div><label>Enter Location Name</label><input id="w-search" placeholder="e.g. Wayanad, Kannur, Kottayam..." onkeydown="if(event.key==='Enter') searchWeather()"/></div>
+        <div style="display:flex;align-items:flex-end"><button class="btn btn-primary" onclick="searchWeather()" style="width:100%">Get Weather</button></div>
+      </div>
+    </div>
+
+    <div class="wg" id="weather-cards"><div class="loading">Loading...</div></div>
+
+    <div class="tw admin-only">
+      <div class="th"><h3>Forecast Records</h3><button class="btn btn-ghost btn-sm" onclick="loadWeather()">↻ Refresh</button></div>
+      <table><thead><tr><th>Location</th><th>Temp</th><th>Condition</th><th>Humidity</th><th>Wind</th><th>Alert</th><th>Date</th><th>Del</th></tr></thead>
+      <tbody id="weather-tbody"></tbody></table>
+    </div>
+  </section>
+
+  <!-- ADVISORY -->
+  <section class="page" id="page-advisory">
+    <div class="page-header"><h2>Crop Advisories</h2><p>Season and growth-stage specific crop guidance</p></div>
+    <div class="fc admin-only">
+      <h3>➕ Publish New Advisory</h3>
+      <div class="fr">
+        <div><label>Crop Type</label><input id="a-crop" placeholder="e.g. Rice"/></div>
+        <div><label>Season</label>
+          <select id="a-season"><option>Kharif</option><option>Rabi</option><option>Zaid</option><option>Annual</option></select>
+        </div>
+      </div>
+      <div class="fr">
+        <div><label>Growth Stage</label><input id="a-stage" placeholder="e.g. Tillering, Flowering"/></div>
+        <div><label>Language</label>
+          <select id="a-lang"><option value="en">English</option><option value="ml">Malayalam</option><option value="hi">Hindi</option><option value="ta">Tamil</option></select>
+        </div>
+      </div>
+      <div class="fr full"><div><label>Advisory Content</label><textarea id="a-content" placeholder="Enter crop-specific guidance..."></textarea></div></div>
+      <button class="btn btn-primary" onclick="addAdvisory()">Publish Advisory</button>
+    </div>
+    <div class="fc" style="padding:14px 18px">
+      <div class="fr" style="margin-bottom:0">
+        <div><label>Filter by Crop</label><input id="f-crop" placeholder="Type crop name..." oninput="loadAdvisory()"/></div>
+        <div><label>Filter by Season</label>
+          <select id="f-season" onchange="loadAdvisory()">
+            <option value="">All Seasons</option><option>Kharif</option><option>Rabi</option><option>Zaid</option><option>Annual</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="tw">
+      <div class="th"><h3>All Advisories</h3><button class="btn btn-ghost btn-sm" onclick="loadAdvisory()">↻ Refresh</button></div>
+      <table><thead><tr><th>Crop</th><th>Season</th><th>Growth Stage</th><th>Language</th><th>Advisory Content</th><th>Last Updated</th><th class="admin-only">Del</th></tr></thead>
+      <tbody id="advisory-tbody"><tr><td colspan="7" class="loading">Loading...</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <!-- FARMERS (admin) -->
+  <section class="page" id="page-farmers">
+    <div class="page-header"><h2>Farmers</h2><p>All registered farmer profiles</p></div>
+    <div class="tw">
+      <div class="th"><h3>Registered Farmers</h3><button class="btn btn-ghost btn-sm" onclick="loadFarmers()">↻ Refresh</button></div>
+      <table><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Region</th><th>Language</th><th>Preferred Crops</th><th>Joined</th><th>Del</th></tr></thead>
+      <tbody id="farmers-tbody"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <!-- QUERIES (admin) -->
+  <section class="page" id="page-queries">
+    <div class="page-header"><h2>Farmer Queries</h2><p>Respond to questions from farmers</p></div>
+    <div class="tw">
+      <div class="th"><h3>All Queries</h3><button class="btn btn-ghost btn-sm" onclick="loadAdminQueries()">↻ Refresh</button></div>
+      <table><thead><tr><th>ID</th><th>Farmer</th><th>Region</th><th>Subject</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+      <tbody id="queries-tbody"><tr><td colspan="7" class="loading">Loading...</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <!-- SETTINGS (admin) -->
+  <section class="page" id="page-settings">
+    <div class="page-header"><h2>Settings</h2><p>System configuration and admin management</p></div>
+    <div class="api-panel" style="margin-bottom:20px">
+      <h4>🔑 OpenWeatherMap API Key</h4>
+      <p>Get a free key at <strong>openweathermap.org</strong>. Paste below and save — the weather page will use live data automatically.</p>
+      <div class="api-row">
+        <input type="text" id="owm-key-input2" placeholder="Paste your API key..."/>
+        <button class="btn btn-sky btn-sm" onclick="saveApiKey2()">Save</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearApiKey()">Clear</button>
+      </div>
+      <div id="api-key-status2"></div>
+    </div>
+    <div class="fc">
+      <h3>➕ Add New Admin</h3>
+      <div class="fr">
+        <div><label>Name</label><input id="adm-name" placeholder="Full name"/></div>
+        <div><label>Email</label><input id="adm-email" type="email" placeholder="email@example.com"/></div>
+      </div>
+      <div class="fr">
+        <div><label>Password</label><input id="adm-pass" type="password" placeholder="••••••••"/></div>
+        <div><label>Role</label>
+          <select id="adm-role"><option value="editor">Editor</option><option value="viewer">Viewer</option><option value="superadmin">Superadmin</option></select>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addAdmin()">Add Admin</button>
+    </div>
+    <div class="tw">
+      <div class="th"><h3>Admin Accounts</h3></div>
+      <table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Del</th></tr></thead>
+      <tbody id="admins-tbody"><tr><td colspan="6" class="loading">Loading...</td></tr></tbody></table>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<!-- Respond Modal -->
+<div class="mbg" id="respond-modal">
+  <div class="modal">
+    <h3>✍️ Respond to Query</h3>
+    <p id="modal-subject" style="font-size:.85rem;color:var(--muted);margin-bottom:14px;padding:10px;background:var(--warm);border-radius:7px"></p>
+    <label>Your Expert Response</label>
+    <textarea id="modal-response" rows="4" placeholder="Type your response..."></textarea>
+    <div class="mf">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitResponse()">Send Response</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────
+const API = window.location.origin + '/api';
+
+// ── STATE ───────────────────────────────────────────────────
+let token = localStorage.getItem('fa_token');
+let user  = JSON.parse(localStorage.getItem('fa_user') || 'null');
+let activeQueryId = null;
+
+// ── HTTP ────────────────────────────────────────────────────
+async function api(method, path, body) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (token) opts.headers['Authorization'] = 'Bearer ' + token;
+  if (body)  opts.body = JSON.stringify(body);
+  const res  = await fetch(API + path, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+// ── AUTH TABS ───────────────────────────────────────────────
+let authRole = 'farmer';
+function setRole(r) {
+  authRole = r;
+  document.getElementById('role-farmer').classList.toggle('active', r==='farmer');
+  document.getElementById('role-admin').classList.toggle('active',  r==='admin');
+  document.getElementById('login-farmer-fields').style.display = r==='farmer' ? '' : 'none';
+  document.getElementById('login-admin-fields').style.display  = r==='admin'  ? '' : 'none';
+}
+function switchAuthTab(t) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===(t==='login'?0:1)));
+  document.getElementById('auth-login').style.display    = t==='login'    ? '' : 'none';
+  document.getElementById('auth-register').style.display = t==='register' ? '' : 'none';
+}
+
+async function doLogin() {
+  try {
+    let data;
+    if (authRole === 'farmer') {
+      const phone = document.getElementById('l-phone').value.trim();
+      const pass  = document.getElementById('l-pass').value;
+      if (!phone || !pass) { toast('Enter phone and password', true); return; }
+      data = await api('POST', '/auth/farmer/login', { phone, password: pass });
+      user = { ...data.farmer, type: 'farmer' };
+    } else {
+      const email = document.getElementById('l-email').value.trim();
+      const pass  = document.getElementById('l-pass').value;
+      if (!email || !pass) { toast('Enter email and password', true); return; }
+      data = await api('POST', '/auth/admin/login', { email, password: pass });
+      user = { ...data.admin, type: 'admin' };
+    }
+    token = data.token;
+    localStorage.setItem('fa_token', token);
+    localStorage.setItem('fa_user', JSON.stringify(user));
+    initApp();
+  } catch(e) { toast(e.message, true); }
+}
+
+async function doRegister() {
+  const name = document.getElementById('r-name').value.trim();
+  const phone = document.getElementById('r-phone').value.trim();
+  const region = document.getElementById('r-region').value.trim();
+  const pass = document.getElementById('r-pass').value;
+  if (!name || !phone || !region || !pass) { toast('Please fill all fields', true); return; }
+  try {
+    await api('POST', '/auth/farmer/register', {
+      name, phone, region,
+      language_pref: document.getElementById('r-lang').value,
+      password: pass,
+      preferred_crops: document.getElementById('r-crops').value.trim()
+    });
+    toast('✅ Account created! Please login.');
+    switchAuthTab('login');
+    document.getElementById('l-phone').value = phone;
+  } catch(e) { toast(e.message, true); }
+}
+
+function logout() {
+  token = null; user = null;
+  localStorage.removeItem('fa_token');
+  localStorage.removeItem('fa_user');
+  document.getElementById('auth-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+}
+
+// ── INIT ────────────────────────────────────────────────────
+function initApp() {
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('sb-name').textContent = user.name;
+  document.getElementById('sb-role').textContent = user.type==='admin'
+    ? '🔐 ' + user.role : '👨‍🌾 ' + (user.region||'Farmer');
+
+  const isAdmin = user.type === 'admin';
+  document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? '' : 'none');
+  document.querySelectorAll('.farmer-only').forEach(el => el.style.display = isAdmin ? 'none' : 'flex');
+
+  // Load saved API key
+  const savedKey = localStorage.getItem('owm_api_key');
+  if (savedKey) {
+    const inp1 = document.getElementById('owm-key-input');
+    const inp2 = document.getElementById('owm-key-input2');
+    if (inp1) inp1.value = savedKey;
+    if (inp2) inp2.value = savedKey;
+    showApiStatus(savedKey);
+  }
+
+  show('dashboard');
+}
+
+// ── NAVIGATION ──────────────────────────────────────────────
+function show(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  const nav = document.querySelector(`.ni[onclick="show('${page}')"]`);
+  if (nav) nav.classList.add('active');
+  const loaders = {
+    dashboard: loadDashboard, market: loadMarket, weather: loadWeather,
+    advisory: loadAdvisory, farmers: loadFarmers, queries: loadAdminQueries,
+    settings: loadSettings, myadvisory: loadMyAdvisory, myqueries: loadFarmerQueries,
+  };
+  if (loaders[page]) loaders[page]();
+}
+
+// ── API KEY ─────────────────────────────────────────────────
+function saveApiKey() {
+  const key = document.getElementById('owm-key-input').value.trim();
+  if (!key) { toast('Paste a valid API key first', true); return; }
+  localStorage.setItem('owm_api_key', key);
+  const inp2 = document.getElementById('owm-key-input2');
+  if (inp2) inp2.value = key;
+  showApiStatus(key);
+  toast('✅ API key saved — weather will use live data');
+  loadWeather();
+}
+function saveApiKey2() {
+  const key = document.getElementById('owm-key-input2').value.trim();
+  if (!key) { toast('Paste a valid API key first', true); return; }
+  localStorage.setItem('owm_api_key', key);
+  document.getElementById('owm-key-input').value = key;
+  showApiStatus(key);
+  toast('✅ API key saved');
+}
+function clearApiKey() {
+  localStorage.removeItem('owm_api_key');
+  document.getElementById('owm-key-input').value = '';
+  const inp2 = document.getElementById('owm-key-input2');
+  if (inp2) inp2.value = '';
+  showApiStatus('');
+  toast('API key cleared — using demo data');
+}
+function showApiStatus(key) {
+  const html = key
+    ? `<div class="api-status ok">✅ Live API key active</div>`
+    : `<div class="api-status demo">⚠️ Using demo/database data (no API key)</div>`;
+  const s1 = document.getElementById('api-key-status');
+  const s2 = document.getElementById('api-key-status2');
+  if (s1) s1.innerHTML = html;
+  if (s2) s2.innerHTML = html;
+}
+
+// ── WEATHER SEARCH ──────────────────────────────────────────
+async function searchWeather() {
+  const loc = document.getElementById('w-search').value.trim();
+  if (!loc) { toast('Enter a location name', true); return; }
+  const apiKey = localStorage.getItem('owm_api_key');
+  if (!apiKey) {
+    toast('⚠️ Add an API key first to search live weather', true);
+    return;
+  }
+  try {
+    // Temporarily store key in server env via a custom header approach:
+    // We just call our own API but inject the key as a query param for this session
+    const res = await fetch(`${API}/weather?locations=${encodeURIComponent(loc)}&apikey=${encodeURIComponent(apiKey)}`);
+    const data = await res.json();
+    // Prepend to existing cards
+    const container = document.getElementById('weather-cards');
+    const newCard = renderWeatherCard(data[0] || { location: loc, temperature:'—', weather_condition:'Not Found', humidity:'—', wind_speed:'—', is_extreme:false, forecast_date: new Date().toISOString().slice(0,10), source:'search' });
+    container.insertAdjacentHTML('afterbegin', newCard);
+    toast(`✅ Got weather for ${loc}`);
+  } catch(e) { toast('Could not fetch weather: ' + e.message, true); }
+}
+
+// ── DASHBOARD ───────────────────────────────────────────────
+async function loadDashboard() {
+  try {
+    const stats = await api('GET', '/stats');
+    document.getElementById('d-farmers').textContent = stats.farmers;
+    document.getElementById('d-prices').textContent  = stats.price_records;
+    document.getElementById('d-adv').textContent     = stats.advisories;
+    document.getElementById('d-pq').textContent      = stats.pending_queries;
+    document.getElementById('dash-alerts').innerHTML = stats.extreme_alerts.length
+      ? `<div class="alert alert-danger">🚨 <div><strong>Extreme Weather Alert!</strong> Severe conditions expected in: <strong>${stats.extreme_alerts.join(', ')}</strong>. Advise farmers to avoid field activities.</div></div>`
+      : `<div class="alert alert-success">✅ No extreme weather alerts today. Conditions are normal.</div>`;
+  } catch(e) {}
+
+  try {
+    const prices = await api('GET', '/market');
+    document.getElementById('dash-prices').innerHTML = prices.slice(0,5).map(p=> {
+      const ch = p.change || 0;
+      const chStr = ch > 0 ? `<span class="up-arrow">▲${ch}</span>` : ch < 0 ? `<span class="dn-arrow">▼${Math.abs(ch)}</span>` : '';
+      return `<div class="price-row">
+        <div><div style="font-weight:500;font-size:.88rem">${p.crop_name}</div><div style="font-size:.72rem;color:var(--muted)">${p.source_market}</div></div>
+        <div style="text-align:right"><div style="font-family:'IBM Plex Mono',monospace;color:var(--leaf);font-weight:500">₹${parseFloat(p.current_price).toFixed(2)}</div><div style="font-size:.72rem">${chStr}</div></div>
+      </div>`;
+    }).join('') || '<p style="color:var(--muted);font-size:.85rem;padding:10px 0">No data</p>';
+  } catch(e) {}
+
+  try {
+    const apiKey = localStorage.getItem('owm_api_key') || '';
+    const weathers = await api('GET', '/weather?locations=Thrissur,Palakkad,Ernakulam,Kozhikode');
+    document.getElementById('dash-weather').innerHTML = weathers.map(w =>
+      `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)">
+        <div style="font-size:.85rem;font-weight:500">${weatherEmoji(w.weather_condition)} ${w.location}</div>
+        <div>
+          <span style="font-family:'IBM Plex Mono',monospace;color:${w.is_extreme?'var(--danger)':'var(--leaf)'};">${w.temperature}°C</span>
+          ${w.is_extreme ? '<span style="font-size:.65rem;background:#FFE0E0;color:var(--danger);padding:1px 6px;border-radius:4px;margin-left:4px">ALERT</span>' : ''}
+        </div>
+      </div>`
+    ).join('');
+  } catch(e) {}
+}
+
+// ── MARKET ──────────────────────────────────────────────────
+async function loadMarket() {
+  try {
+    const data = await api('GET', '/market');
+    const isAdmin = user && user.type === 'admin';
+    document.getElementById('market-tbody').innerHTML = data.map(m => {
+      const ch = m.change || 0;
+      const chHtml = ch > 0 ? `<span class="up-arrow">▲ ₹${ch}</span>` : ch < 0 ? `<span class="dn-arrow">▼ ₹${Math.abs(ch)}</span>` : '<span style="color:var(--muted)">—</span>';
+      return `<tr>
+        <td><strong>${m.crop_name}</strong></td>
+        <td style="font-family:'IBM Plex Mono',monospace;font-weight:600">₹${parseFloat(m.current_price).toFixed(2)}</td>
+        <td>${chHtml}</td>
+        <td>${m.source_market}</td>
+        <td>${m.state||'Kerala'}</td>
+        <td>${m.date_updated}</td>
+        ${isAdmin ? `<td><button class="btn btn-danger btn-sm" onclick="deleteMarket(${m.price_id})">🗑</button></td>` : '<td></td>'}
+      </tr>`;
+    }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">No records found</td></tr>';
+  } catch(e) { toast(e.message, true); }
+}
+
+async function addPrice() {
+  try {
+    await api('POST', '/market', {
+      crop_name: v('mp-crop'), current_price: v('mp-price'),
+      source_market: v('mp-market'), state: v('mp-state') || 'Kerala'
+    });
+    clear(['mp-crop','mp-price','mp-market']); loadMarket(); loadDashboard();
+    toast('✅ Price saved');
+  } catch(e) { toast(e.message, true); }
+}
+async function deleteMarket(id) {
+  try { await api('DELETE', '/market/'+id); loadMarket(); toast('🗑 Deleted'); } catch(e) { toast(e.message, true); }
+}
+
+// ── WEATHER ─────────────────────────────────────────────────
+function renderWeatherCard(w) {
+  return `<div class="wc ${w.is_extreme?'extreme':''}" id="wcard-${w.fc_id||'s'}">
+    <div class="loc">📍 ${w.location}</div>
+    <div class="temp">${weatherEmoji(w.weather_condition)} ${w.temperature}°C</div>
+    <div class="cond">${w.weather_condition}</div>
+    <div class="extra">💧 ${w.humidity||'—'}% humidity &nbsp; 💨 ${w.wind_speed||'—'} km/h</div>
+    ${w.is_extreme ? '<div style="margin-top:8px;font-size:.73rem;font-weight:600;background:rgba(255,255,255,.2);padding:3px 8px;border-radius:4px;display:inline-block">⚠️ EXTREME WEATHER ALERT</div>' : ''}
+    <div class="src-tag">${w.source||'db'}</div>
+  </div>`;
+}
+
+async function loadWeather() {
+  try {
+    const data = await api('GET', '/weather?locations=Thrissur,Palakkad,Ernakulam,Kozhikode,Wayanad,Kannur');
+    document.getElementById('weather-cards').innerHTML = data.map(renderWeatherCard).join('');
+    document.getElementById('weather-tbody').innerHTML = data.map(w =>
+      `<tr>
+        <td><strong>${w.location}</strong></td>
+        <td>${w.temperature}°C</td>
+        <td>${w.weather_condition}</td>
+        <td>${w.humidity||'—'}%</td>
+        <td>${w.wind_speed||'—'} km/h</td>
+        <td>${w.is_extreme ? '<span class="badge red">⚠️ Yes</span>' : '<span class="badge green">No</span>'}</td>
+        <td>${w.forecast_date}</td>
+        <td>${w.fc_id ? `<button class="btn btn-danger btn-sm" onclick="deleteWeather(${w.fc_id})">🗑</button>` : '—'}</td>
+      </tr>`
+    ).join('');
+
+    // Show API status
+    const savedKey = localStorage.getItem('owm_api_key');
+    showApiStatus(savedKey || '');
+  } catch(e) { toast(e.message, true); }
+}
+
+async function deleteWeather(id) {
+  try { await api('DELETE', '/weather/'+id); loadWeather(); toast('🗑 Deleted'); } catch(e) { toast(e.message, true); }
+}
+
+// ── ADVISORY ────────────────────────────────────────────────
+async function loadAdvisory() {
+  try {
+    const crop = v('f-crop'), season = v('f-season');
+    let path = '/advisory?lang=en';
+    if (crop)   path += '&crop='   + encodeURIComponent(crop);
+    if (season) path += '&season=' + encodeURIComponent(season);
+    const data = await api('GET', path);
+    const isAdmin = user && user.type === 'admin';
+    document.getElementById('advisory-tbody').innerHTML = data.map(a =>
+      `<tr>
+        <td><strong>${a.crop_type}</strong></td>
+        <td><span class="badge blue">${a.season}</span></td>
+        <td>${a.growth_stage || '—'}</td>
+        <td><span class="badge ${a.language==='en'?'green':'amber'}">${a.language.toUpperCase()}</span></td>
+        <td style="max-width:300px;font-size:.82rem;line-height:1.5">${a.content}</td>
+        <td style="font-size:.78rem">${(a.last_updated||'').slice(0,10)}</td>
+        ${isAdmin ? `<td><button class="btn btn-danger btn-sm" onclick="deleteAdvisory(${a.adv_id})">🗑</button></td>` : '<td></td>'}
+      </tr>`
+    ).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">No advisories found</td></tr>';
+  } catch(e) { toast(e.message, true); }
+}
+
+async function loadMyAdvisory() {
+  try {
+    const data = await api('GET', '/advisory/for-farmer');
+    document.getElementById('my-adv-list').innerHTML = data.length
+      ? data.map(a =>
+        `<div class="adv-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <h3 style="font-size:1rem;color:var(--earth);margin-bottom:6px">🌿 ${a.crop_type}</h3>
+              <span class="badge blue">${a.season}</span>
+              ${a.growth_stage ? `<span class="badge amber" style="margin-left:6px">${a.growth_stage}</span>` : ''}
+            </div>
+            <span style="font-size:.72rem;color:var(--muted)">${(a.last_updated||'').slice(0,10)}</span>
+          </div>
+          <p>${a.content}</p>
+        </div>`
+      ).join('')
+      : `<div class="alert alert-info">ℹ️ No advisories found for your crops. Try updating your profile with preferred crops like "Rice,Coconut".</div>`;
+  } catch(e) { toast(e.message, true); }
+}
+
+async function addAdvisory() {
+  try {
+    await api('POST', '/advisory', {
+      crop_type: v('a-crop'), season: v('a-season'),
+      growth_stage: v('a-stage'), content: v('a-content'), language: v('a-lang')
+    });
+    clear(['a-crop','a-stage','a-content']); loadAdvisory();
+    toast('✅ Advisory published');
+  } catch(e) { toast(e.message, true); }
+}
+async function deleteAdvisory(id) {
+  try { await api('DELETE', '/advisory/'+id); loadAdvisory(); toast('🗑 Deleted'); } catch(e) { toast(e.message, true); }
+}
+
+// ── QUERIES ─────────────────────────────────────────────────
+async function loadAdminQueries() {
+  try {
+    const data = await api('GET', '/queries');
+    document.getElementById('queries-tbody').innerHTML = data.map(q =>
+      `<tr>
+        <td><code>${q.query_id}</code></td>
+        <td>${q.farmer_name||'—'}</td>
+        <td>${q.region||'—'}</td>
+        <td style="max-width:200px">${q.subject}</td>
+        <td>${bdg(q.status)}</td>
+        <td>${q.submitted_date}</td>
+        <td style="display:flex;gap:6px;flex-wrap:wrap">
+          ${q.status==='pending' ? `<button class="btn btn-primary btn-sm" onclick="openRespond(${q.query_id},'${q.subject.replace(/'/g,"\\'")}')">Respond</button>` : ''}
+          <button class="btn btn-danger btn-sm" onclick="deleteQuery(${q.query_id})">🗑</button>
+        </td>
+      </tr>`
+    ).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">No queries</td></tr>';
+  } catch(e) { toast(e.message, true); }
+}
+
+async function loadFarmerQueries() {
+  try {
+    const data = await api('GET', '/queries');
+    document.getElementById('fq-tbody').innerHTML = data.map(q =>
+      `<tr>
+        <td style="max-width:200px;font-weight:500">${q.subject}</td>
+        <td>${bdg(q.status)}</td>
+        <td>${q.submitted_date}</td>
+        <td>${q.response
+          ? `<div class="response-box">💬 <strong>${q.admin_name||'Expert'}:</strong> ${q.response}</div>`
+          : '<span style="color:var(--muted);font-size:.8rem">Awaiting response...</span>'}</td>
+      </tr>`
+    ).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">No queries yet. Ask a question above!</td></tr>';
+  } catch(e) { toast(e.message, true); }
+}
+
+async function submitFarmerQuery() {
+  const subject = v('fq-subject'), description = v('fq-desc');
+  if (!subject || !description) { toast('Fill in subject and description', true); return; }
+  try {
+    await api('POST', '/queries', { subject, description });
+    clear(['fq-subject','fq-desc']); loadFarmerQueries();
+    toast('✅ Query submitted successfully');
+  } catch(e) { toast(e.message, true); }
+}
+
+function openRespond(id, subject) {
+  activeQueryId = id;
+  document.getElementById('modal-subject').textContent = subject;
+  document.getElementById('modal-response').value = '';
+  document.getElementById('respond-modal').classList.add('open');
+}
+function closeModal() { document.getElementById('respond-modal').classList.remove('open'); }
+
+async function submitResponse() {
+  const response = v('modal-response');
+  if (!response) { toast('Type a response first', true); return; }
+  try {
+    await api('PUT', '/queries/'+activeQueryId+'/respond', { response });
+    closeModal(); loadAdminQueries();
+    toast('✅ Response sent to farmer');
+  } catch(e) { toast(e.message, true); }
+}
+
+async function deleteQuery(id) {
+  try { await api('DELETE', '/queries/'+id); loadAdminQueries(); toast('🗑 Deleted'); } catch(e) { toast(e.message, true); }
+}
+
+// ── FARMERS ─────────────────────────────────────────────────
+async function loadFarmers() {
+  try {
+    const data = await api('GET', '/farmers');
+    document.getElementById('farmers-tbody').innerHTML = data.map(f =>
+      `<tr>
+        <td><code>${f.farmer_id}</code></td>
+        <td><strong>${f.name}</strong></td>
+        <td>${f.phone}</td>
+        <td>${f.region}</td>
+        <td><span class="badge blue">${f.language_pref.toUpperCase()}</span></td>
+        <td>${f.preferred_crops||'—'}</td>
+        <td style="font-size:.78rem">${(f.created_at||'').slice(0,10)}</td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteFarmer(${f.farmer_id})">🗑</button></td>
+      </tr>`
+    ).join('') || '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:20px">No farmers registered</td></tr>';
+  } catch(e) { toast(e.message, true); }
+}
+async function deleteFarmer(id) {
+  try { await api('DELETE', '/farmers/'+id); loadFarmers(); toast('🗑 Farmer removed'); } catch(e) { toast(e.message, true); }
+}
+
+// ── SETTINGS / ADMINS ───────────────────────────────────────
+async function loadSettings() {
+  const savedKey = localStorage.getItem('owm_api_key') || '';
+  const inp = document.getElementById('owm-key-input2');
+  if (inp) inp.value = savedKey;
+  showApiStatus(savedKey);
+  loadAdmins();
+}
+
+async function loadAdmins() {
+  try {
+    const data = await api('GET', '/admins');
+    document.getElementById('admins-tbody').innerHTML = data.map(a =>
+      `<tr>
+        <td><code>${a.admin_id}</code></td>
+        <td><strong>${a.name}</strong></td>
+        <td>${a.email}</td>
+        <td><span class="badge ${a.role==='superadmin'?'red':a.role==='editor'?'blue':'amber'}">${a.role}</span></td>
+        <td style="font-size:.78rem">${(a.created_at||'').slice(0,10)}</td>
+        <td><button class="btn btn-danger btn-sm" onclick="deleteAdmin(${a.admin_id})">🗑</button></td>
+      </tr>`
+    ).join('');
+  } catch(e) { toast(e.message, true); }
+}
+
+async function addAdmin() {
+  try {
+    await api('POST', '/admins', { name: v('adm-name'), email: v('adm-email'), password: v('adm-pass'), role: v('adm-role') });
+    clear(['adm-name','adm-email','adm-pass']); loadAdmins();
+    toast('✅ Admin added');
+  } catch(e) { toast(e.message, true); }
+}
+async function deleteAdmin(id) {
+  try { await api('DELETE', '/admins/'+id); loadAdmins(); toast('🗑 Admin removed'); } catch(e) { toast(e.message, true); }
+}
+
+// ── UTILS ───────────────────────────────────────────────────
+function v(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function clear(ids) { ids.forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; }); }
+
+function bdg(s) {
+  const m = { pending:'amber', answered:'green', closed:'blue' };
+  return `<span class="badge ${m[s]||'amber'}">${s}</span>`;
+}
+function weatherEmoji(c='') {
+  if(c.includes('Sunny')||c.includes('Clear')) return '☀️';
+  if(c.includes('Partly')||c.includes('few')) return '⛅';
+  if(c.includes('Cloud')||c.includes('Overcast')) return '☁️';
+  if(c.includes('Heavy')||c.includes('moderate rain')) return '🌧️';
+  if(c.includes('Light')||c.includes('drizzle')) return '🌦️';
+  if(c.includes('Thunder')) return '⛈️';
+  if(c.includes('Mist')||c.includes('Fog')||c.includes('Haze')) return '🌫️';
+  return '🌡️';
+}
+
+let toastTimer;
+function toast(msg, isErr=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = isErr ? 'err show' : 'show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = isErr ? 'err' : '', 3200);
+}
+
+document.getElementById('respond-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ── AUTO LOGIN ──────────────────────────────────────────────
+if (token && user) {
+  // Validate the stored token by making a lightweight API call
+  // If server restarted or token expired, gracefully redirect to login
+  (async () => {
+    try {
+      await api('GET', '/stats');
+      initApp();
+    } catch (e) {
+      // Token is invalid or expired — clear stale session
+      console.warn('Stored token is invalid, redirecting to login:', e.message);
+      token = null;
+      user = null;
+      localStorage.removeItem('fa_token');
+      localStorage.removeItem('fa_user');
+      document.getElementById('auth-screen').style.display = 'flex';
+      document.getElementById('app').style.display = 'none';
+    }
+  })();
+}
+</script>
+</body>
+</html>
