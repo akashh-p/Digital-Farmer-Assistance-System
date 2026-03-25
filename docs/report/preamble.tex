@@ -1,0 +1,65 @@
+% ---------- preamble.tex ----------
+\usepackage[a4paper, top=2.54cm, bottom=2.54cm, left=3cm, right=2.54cm]{geometry}
+\usepackage{mathptmx}           % Times New Roman equivalent for pdflatex
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, fit, calc, backgrounds}
+
+% Spacing
+\onehalfspacing
+
+% Section formatting
+\titleformat{\chapter}[block]{\large\bfseries\centering}{Chapter \thechapter:}{1em}{}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\itshape}{\thesubsection}{1em}{}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Digital Farmer Assistance System}
+\fancyhead[R]{\small PECST411 --- SE Micro Project}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Listings style
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  captionpos=b,
+  numbers=left,
+  numberstyle=\tiny,
+  tabsize=2
+}
+
+% Image placeholder command
+% Usage: \imgplaceholder{width_cm}{height_cm}{Caption}{label_suffix}
+\newcommand{\imgplaceholder}[4]{%
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \draw[thick, dashed, gray!60] (0,0) rectangle (#1,#2);
+      \fill[gray!10] (0,0) rectangle (#1,#2);
+      \node[gray!70, align=center, text width=#1 cm] at (#1/2, #2/2)
+        {\small \textit{[Screenshot Placeholder]\\#3}};
+    \end{tikzpicture}
+    \caption{#3}
+    \label{fig:#4}
+  \end{figure}%
+}

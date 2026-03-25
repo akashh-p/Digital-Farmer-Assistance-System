@@ -1,0 +1,78 @@
+\section{Functional Requirements}
+Functional requirements represent the specific behavioral functions that the system must perform to satisfy the user's needs. The core capabilities of the Digital Farmer Assistance System are explicitly defined to track user interactions and data processing workflows.
+
+\begin{longtable}{>{\bfseries}p{1.5cm} p{10cm} p{2cm}}
+\caption{Functional Requirements of the Digital Farmer Assistance System} \label{tab:functional_req} \\
+\toprule
+FR ID & Description & Priority \\
+\midrule
+\endfirsthead
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\toprule
+FR ID & Description & Priority \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+FR1 & \textbf{User Management:} The system shall allow farmers to securely register, authenticate, and manage personalized profiles, including the selection of preferred crop types and geographic regions. & High \\
+\addlinespace
+FR2 & \textbf{Advisory Engine:} The system shall dynamically filter and provide crop-specific agricultural guidance based on the inputted growth stage, prevailing season, and the farmer's declared preferences. & High \\
+\addlinespace
+FR3 & \textbf{Information Retrieval:} The system shall aggregate and display daily updated market prices from various regional markets, alongside localized 5-day weather forecasts utilizing external API integrations. & High \\
+\addlinespace
+FR4 & \textbf{Alert System:} The system shall continuously monitor incoming meteorological data and push automated notifications or visual highlights on the dashboard for extreme weather warnings. & High \\
+\addlinespace
+FR5 & \textbf{Admin Control:} The system shall provide a comprehensive, secure dashboard for administrators to perform CRUD (Create, Read, Update, Delete) operations on market prices, weather data, and advisory content. & High \\
+\addlinespace
+FR6 & \textbf{Interaction Module:} The system shall encompass a dedicated query resolution module allowing farmers to submit textual descriptions of agricultural issues to registered experts for tailored responses. & Medium \\
+
+\end{longtable}
+
+\section{Non-Functional Requirements}
+Non-functional requirements dictate the quality attributes, performance constraints, and architectural characteristics of the platform, ensuring it operates effectively within its intended real-world context.
+
+\begin{longtable}{>{\bfseries}p{1.5cm} p{2.5cm} p{9cm}}
+\caption{Non-Functional Requirements of the System} \label{tab:nonfunctional_req} \\
+\toprule
+NFR ID & Category & Description \\
+\midrule
+\endfirsthead
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\toprule
+NFR ID & Category & Description \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+NFR1 & Performance & The platform must be stringently optimized to load essential text and layout data within 2 seconds over standard 2G or unstable low-bandwidth cellular connections indicative of rural areas. \\
+\addlinespace
+NFR2 & Availability & The system architecture shall be designed to maintain 99.9\% uptime, ensuring 24/7 availability of critical fallback data even during third-party API outages. \\
+\addlinespace
+NFR3 & Usability & The user interface must strictly adhere to ``Mobile-First'' design principles, incorporating high-contrast typography and intuitive iconography suited for users with varying levels of digital literacy. \\
+\addlinespace
+NFR4 & Accessibility & The system shall implement internationalization support at the database level to natively render advisories in at least three regional languages in addition to English. \\
+\addlinespace
+NFR5 & Scalability & The software architecture must support a concurrent user increase of at least 20\% annually without experiencing measurable performance degradation or requiring fundamental codebase refactoring. \\
+\addlinespace
+NFR6 & Security & All sensitive user profiling data must be encrypted at rest, and all inter-node communication must be secured. Authentication shall rely on industry-standard stateless JWTs and bcrypt cryptographic hashing. \\
+
+\end{longtable}
+
+\section{SDG Alignment}
+The design, implementation, and deployment of the Digital Farmer Assistance System are fundamentally aligned with the United Nations Sustainable Development Goals (SDGs), ensuring the software delivers measurable global impact.
+
+\subsection*{SDG 8 – Decent Work and Economic Growth}
+The platform directly contributes to the economic empowerment of small-scale agricultural workers by dismantling information monopolies. By providing farmers with unmediated, direct access to daily market pricing trends, the system eradicates the reliance on predatory middlemen. This transparency significantly elevates the income potential of marginalized farmers, fostering an environment where agricultural labor equates to fair, decent economic growth and improved financial autonomy.
+
+\subsection*{SDG 9 – Industry, Innovation, and Infrastructure}
+The deployment of this system embodies the innovative utilization of modern digital infrastructure to modernize traditional, analog agricultural practices. By leveraging cloud computing, mobile technologies, and external data APIs, the system introduces cutting-edge industrial innovation to rural environments that are traditionally underserved by technological advances. It establishes a resilient digital connective tissue that enhances rural technological infrastructure, thereby fulfilling the core mandate of SDG 9.

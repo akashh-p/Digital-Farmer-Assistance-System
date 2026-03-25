@@ -1,0 +1,88 @@
+\section{Language and Runtime environment}
+The entirety of the Digital Farmer Assistance System is constructed utilizing JavaScript. The backend architecture dictates a dedicated Node.js (v18+) runtime environment. Node.js is selected explicitly for its non-blocking, asynchronous, event-driven infrastructure, which is universally recognized as highly optimal for I/O-heavy networking workloads—such as simultaneously processing dozens of concurrent MySQL database queries and external weather API connections without experiencing thread starvation. The frontend ecosystem leverages hyper-efficient Vanilla JavaScript (ES6+), HTML5, and CSS3. By completely excising heavy compilation steps or bulky client-side frameworks (e.g., React or Angular), the platform dramatically reduces initial payload sizes, creating a remarkably responsive interface optimally tailored for restrictive, low-bandwidth rural cellular environments. The persistence layer operates strictly on standard SQL protocols executing within a MySQL 8.0 cluster.
+
+\section{Frameworks and Libraries}
+The system carefully curates a minimalist compilation of proven NPM libraries to accelerate development timelines while rigorously enforcing a minimal attack surface.
+
+\begin{table}[H]
+\centering
+\caption{Primary Third-Party Dependencies}
+\label{tab:dependencies}
+\begin{tabular}{>{\bfseries}p{3cm} p{10cm}}
+\toprule
+Library Package & Architectural Purpose \\
+\midrule
+Express.js & Provides the foundational HTTP routing server and essential middleware pipeline configurations. \\
+\addlinespace
+mysql2 & Provides an optimized MySQL connection pool natively supporting modern \texttt{async/await} syntax. \\
+\addlinespace
+bcryptjs & Handles cryptographic password hashing protocols, utilizing a robust workload configuration of 10 salt rounds. \\
+\addlinespace
+jsonwebtoken & Administers all stateless JSON Web Token generation and cryptographic validation algorithms. \\
+\addlinespace
+dotenv & Enables rigorous environment variable management, cleanly separating credentials from the raw source code. \\
+\addlinespace
+cors & Enforces Cross-Origin Resource Sharing security headers for strict browser-level access. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Project Architecture Structure}
+The file repository is rigorously structured to prioritize maintainability and an absolute separation of computing concerns. The hierarchy logically partitions raw configuration, middleware abstractions, and independent data route handlers into isolated, cohesive directories.
+
+\begin{verbatim}
+farmer-system/
+├── server.js            <- Express entry point
+├── db.js                <- MySQL connection pool
+├── schema.sql           <- Full database schema + seed data
+├── .env.example         <- Config template (copy to .env)
+├── package-lock.json
+├── package.json
+├── middleware/
+│   └── auth.js          <- JWT authentication middleware
+├── routes/
+│   ├── auth.js          <- POST /api/auth/farmer/login, /register, /admin/login
+│   ├── farmers.js       <- GET/PUT/DELETE /api/farmers
+│   ├── market.js        <- GET/POST/PUT/DELETE /api/market
+│   ├── weather.js       <- GET/POST/DELETE /api/weather  (OWM API + DB fallback)
+│   ├── advisory.js      <- GET/POST/PUT/DELETE /api/advisory
+│   ├── queries.js       <- GET/POST/PUT/DELETE /api/queries
+│   └── admins.js        <- GET/POST/DELETE /api/admins
+└── public/
+    └── index.html       <- Full frontend (HTML + CSS + JS)
+\end{verbatim}
+
+\section{Coding Standards}
+Codebase integrity is enforced via a rigid set of programmatic conventions:
+\begin{itemize}
+    \item \textbf{RESTful Resource Protocols:} Endpoints strictly conform to HTTP verb definitions: \texttt{GET} for non-destructive reads, \texttt{POST} for record creation, \texttt{PUT} for total updates, and \texttt{DELETE} for sanitization.
+    \item \textbf{Asynchronous Exception Handling:} Asynchronous operations mandate the deployment of encompassing \texttt{try/catch} structures, preventing fatal server termination upon localized execution failures.
+    \item \textbf{Security Parameters:} All database interactions deploy aggressively parameterized SQL queries to categorically eradicate SQL injection vulnerabilities. Role-based Access Control (RBAC) validations are securely abstracted into middleware interceptors.
+\end{itemize}
+
+\section{Representative Implementation Code}
+The following abbreviated code excerpt delineates the standard authentication pattern utilized throughout the system. The snippet powerfully demonstrates active SQL parameterization natively mitigating injection vectors, concurrent secure cryptographic comparison via bcrypt, and the final generation of an encrypted JSON Web Token for stateless access control.
+
+\begin{lstlisting}[language=JavaScript, caption={Implementation of Farmer Authentication Protocol}]
+router.post('/farmer/login', async (req, res) => {
+  const { phone, password } = req.body;
+  if (!phone || !password) return res.status(400).json({ error: 'phone and password required' });
+
+  try {
+    const [rows] = await db.execute('SELECT * FROM FARMER WHERE phone = ?', [phone]);
+    if (!rows.length) return res.status(401).json({ error: 'Invalid credentials' });
+
+    const farmer = rows[0];
+    const match  = await bcrypt.compare(password, farmer.password);
+    if (!match) return res.status(401).json({ error: 'Invalid credentials' });
+
+    const token = jwt.sign(
+      { id: farmer.farmer_id, type: 'farmer', name: farmer.name, region: farmer.region, lang: farmer.language_pref },
+      process.env.JWT_SECRET || 'secret', { expiresIn: '7d' }
+    );
+    res.json({ token, farmer: { farmer_id: farmer.farmer_id, name: farmer.name, region: farmer.region, language_pref: farmer.language_pref } });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+\end{lstlisting}

@@ -1,0 +1,68 @@
+\documentclass[12pt, a4paper]{report}
+\input{preamble}
+
+\begin{document}
+
+%% Cover Page (no page number)
+\input{chapters/00_cover}
+\cleardoublepage
+
+%% Front Matter
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+%% Abstract
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\input{chapters/01_abstract}
+\newpage
+
+%% Main Chapters
+\chapter{Introduction}
+\input{chapters/02_introduction}
+
+\chapter{Problem Statement}
+\input{chapters/03_problem_statement}
+
+\chapter{Requirement Analysis}
+\input{chapters/04_requirement_analysis}
+
+\chapter{Feasibility Study}
+\input{chapters/05_feasibility}
+
+\chapter{Software Requirement Specification (SRS)}
+\input{chapters/06_srs}
+
+\chapter{System Design}
+\input{chapters/07_system_design}
+
+\chapter{UML Diagrams}
+\input{chapters/08_uml_diagrams}
+
+\chapter{Coding Strategy}
+\input{chapters/09_coding_strategy}
+
+\chapter{Testing Strategy}
+\input{chapters/10_testing_strategy}
+
+\chapter{Deployment Plan}
+\input{chapters/11_deployment_plan}
+
+\chapter{Reflection and Learning Outcomes}
+\input{chapters/12_reflection}
+
+%% References
+\chapter*{References}
+\addcontentsline{toc}{chapter}{References}
+\input{chapters/13_references}
+
+%% Appendix
+\appendix
+\chapter{Product Screenshots}
+\input{chapters/14_appendix}
+
+\end{document}
