@@ -30,22 +30,46 @@ farmer-system/
 
 ## ⚙️ Setup Instructions
 
-### 1. Prerequisites
+### Option A: Docker Setup (Recommended)
+
+**Prerequisites:** Docker and Docker Compose installed.
+
+1. **Navigate to the Project Directory**
+   ```bash
+   cd farmer-system
+   ```
+2. **Start the Containers**
+   ```bash
+   sudo docker compose up -d --build
+   ```
+   *(Note: The database is automatically created and seeded from `schema.sql` on the first launch. You don't need to configure `.env` manually unless you want to override default values).*
+3. **Open the Application**
+   Visit: **http://localhost:3000**
+4. **View Logs (Optional)**
+   ```bash
+   sudo docker compose logs -f app
+   ```
+
+---
+
+### Option B: Manual Setup
+
+#### 1. Prerequisites
 - Node.js v18+
 - MySQL 8.0+
 
-### 2. Clone / Copy Project
+#### 2. Install Dependencies
 ```bash
 cd farmer-system
 npm install
 ```
 
-### 3. Configure Environment
+#### 3. Configure Environment
 ```bash
 cp .env.example .env
 ```
 Edit `.env`:
-```
+```env
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
@@ -56,14 +80,14 @@ WEATHER_API_KEY=DEMO       # or your free key from openweathermap.org
 PORT=3000
 ```
 
-### 4. Set Up Database
+#### 4. Set Up Database
 Open MySQL and run:
 ```bash
 mysql -u root -p < schema.sql
 ```
 Or paste `schema.sql` into MySQL Workbench and execute.
 
-### 5. Start Server
+#### 5. Start Server
 ```bash
 node server.js
 ```
