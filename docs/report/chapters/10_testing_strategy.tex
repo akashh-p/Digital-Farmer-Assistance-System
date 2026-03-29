@@ -1,4 +1,4 @@
-\section{Testing Approach}
+\subsection{Testing Approach}
 A comprehensive, multi-tiered testing strategy guarantees the absolute reliability and operational accuracy of the system architecture under varying load parameters. The testing protocol leverages three definitive evaluation paradigms:
 \begin{enumerate}
     \item \textbf{Unit Testing Framework:} Granular validation methodologies are deployed to scrutinize the behavioral accuracy of highly isolated functions—particularly cryptographic password hashing mechanisms and JSON web token string generation—independently from the broader application state.
@@ -6,72 +6,19 @@ A comprehensive, multi-tiered testing strategy guarantees the absolute reliabili
     \item \textbf{System and Usability Testing:} Extensive End-to-End (E2E) validations simulate a comprehensive farmer usage trajectory. Testing is heavily focused utilizing Chrome DevTools Device Mode to physically emulate low-resolution, mobile-viewport rendering, rigorously validating frontend HTML/CSS resilience and the accuracy of the multilingual interface.
 \end{enumerate}
 
-\section{Functional Test Cases}
+\subsection{Functional Test Cases}
 The core operational pathways governing CRUD capabilities and database interactions are validated against defined expected outcomes to actively verify systematic integrity.
 
-\begin{longtable}{>{\bfseries}p{1.2cm} p{1.6cm} p{5.5cm} p{4cm} p{1cm}}
+\begingroup\footnotesize\begin{longtable}{>{\bfseries}p{0.08\textwidth} p{0.41\textwidth} p{0.39\textwidth} p{0.08\textwidth}}
 \caption{System Functional Test Cases} \label{tab:functional_tests} \\
 \toprule
-TC ID & Module & Testing Input or Action & Expected Outcome & Status \\
+TC ID & Testing Input or Action & Expected Outcome & Status \\
 \midrule
 \endfirsthead
-\multicolumn{5}{c}%
+\multicolumn{2}{c}%
 {\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
 \toprule
-TC ID & Module & Testing Input or Action & Expected Outcome & Status \\
-\midrule
-\endhead
-\midrule
-\multicolumn{5}{r}{\textit{Continued on next page}} \\
-\endfoot
-\bottomrule
-\endlastfoot
-
-TC01 & Auth & Valid farmer phone string and secret password submitted via \texttt{POST /api/auth/farmer/login} & System returns HTTP 200 OK and a signed JWT bearer token. & Pass \\
-\addlinespace
-TC02 & Auth & Intentional submission of incorrect password parameters to the active login endpoint & System halts execution, returning HTTP 401 Unauthorized. & Pass \\
-\addlinespace
-TC03 & Auth & Authorized administrator email and password injected via \texttt{POST /api/auth/admin/login} & System validates and responds with a JWT imbued with an administrative role capability. & Pass \\
-\addlinespace
-TC04 & Market & Unauthenticated \texttt{GET /api/market} request demanding global pricing arrays & HTTP 200 OK; a complete raw JSON array of recent crop prices is securely transmitted. & Pass \\
-\addlinespace
-TC05 & Market & Appending \texttt{?crop=Rice} query filter parameters onto a standard market \texttt{GET} string & HTTP 200 OK; the persistence layer surgically filters the JSON array exclusively outputting Rice data. & Pass \\
-\addlinespace
-TC06 & Market & Construct valid REST \texttt{POST /api/market} request alongside an administrative JWT string & HTTP 201 Created; the database strictly commits the new pricing entry. & Pass \\
-\addlinespace
-TC07 & Market & Unauthorized Farmer attempts to inject a \texttt{POST /api/market} execution command & The middleware interceptor rapidly isolates the violation, returning HTTP 403 Forbidden. & Pass \\
-\addlinespace
-TC08 & Weather & Client fires \texttt{GET /api/weather?locations=Palakkad} & HTTP 200 OK; live API or offline database returns relevant weather matrices. & Pass \\
-\addlinespace
-TC09 & Weather & Interrogate the system alerts channel via \texttt{GET /api/weather/alerts} & HTTP 200 OK; application identifies and parses any active location tagged with \texttt{is\_extreme}. & Pass \\
-\addlinespace
-TC10 & Advisory & Transmit \texttt{GET /api/advisory?crop=Rice\&season=Kharif} structural queries & HTTP 200 OK; the database applies bidirectional filtering to extract specific operational advice. & Pass \\
-\addlinespace
-TC11 & Advisory & Farmer fires \texttt{GET /api/advisory/for-farmer} carrying an authenticated token & HTTP 200 OK; logic seamlessly extracts user profile preferences, yielding bespoke data without manual filters. & Pass \\
-\addlinespace
-TC12 & Queries & Initiating a \texttt{POST /api/queries} workflow while transmitting a farmer JWT & HTTP 201 Created; a relational query record is initialized under an explicitly \textit{pending} status. & Pass \\
-\addlinespace
-TC13 & Queries & Administrator executes a \texttt{PUT /api/queries/:id/respond} command bridging an answer string & HTTP 200 OK; the database securely updates the targeted query ticket with the expert answer. & Pass \\
-\addlinespace
-TC14 & Farmers & Initiating a \texttt{GET /api/farmers/me} using an established farmer JWT authentication string & HTTP 200 OK; the persistence tier locates and serves the specific localized user profile arrays. & Pass \\
-\addlinespace
-TC15 & Stats & Initiating an authorized dashboard \texttt{GET /api/stats} action sequence & HTTP 200 OK; comprehensive database summarizations, counters, and extreme alert indices are provided. & Pass \\
-
-\end{longtable}
-
-\section{Boundary and Negative Test Cases}
-Negative testing aggressively challenges the software paradigm, assessing whether the logic accurately catches, prevents, or bypasses intentional structural violations or deliberate resource deprivations without triggering fatal system crashes.
-
-\begin{longtable}{>{\bfseries}p{1.2cm} p{2cm} p{6cm} p{4cm}}
-\caption{Boundary and Negative Scenario Emulations} \label{tab:negative_tests} \\
-\toprule
-TC ID & Category & Scenario Input Description & Expected Structural Outcome \\
-\midrule
-\endfirsthead
-\multicolumn{4}{c}%
-{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-\toprule
-TC ID & Category & Scenario Input Description & Expected Structural Outcome \\
+TC ID & Testing Input or Action & Expected Outcome & Status \\
 \midrule
 \endhead
 \midrule
@@ -80,14 +27,67 @@ TC ID & Category & Scenario Input Description & Expected Structural Outcome \\
 \bottomrule
 \endlastfoot
 
-TC16 & Security & Request submitted targeted closely at a protected routing endpoint totally lacking an HTTP \texttt{Authorization} bearer token string. & The core router blocks progress, universally returning HTTP 401 Unauthorized. \\
+TC01 & Valid farmer phone string and secret password submitted via \texttt{POST /api/auth/farmer/login} & System returns HTTP 200 OK and a signed JWT bearer token. & Pass \\
 \addlinespace
-TC17 & Fallback & Deliberately trigger weather data compilation with a malformed or omitted external API key. & The connection dynamically fails over to the persistence layer, rendering offline database fallback data via HTTP 200. \\
+TC02 & Intentional submission of incorrect password parameters to the active login endpoint & System halts execution, returning HTTP 401 Unauthorized. & Pass \\
 \addlinespace
-TC18 & Routing & User executes a GET command targeting \texttt{/api/nonexistent} structural paths. & Unroutable parameters terminate gracefully; the system replies strictly returning a generic HTTP 404 Not Found error. \\
+TC03 & Authorized administrator email and password injected via \texttt{POST /api/auth/admin/login} & System validates and responds with a JWT imbued with an administrative role capability. & Pass \\
 \addlinespace
-TC19 & Consistency & Command dispatched to \texttt{POST /api/auth/farmer/register} forcefully injecting an identical phone number already mapped. & Relational rules forbid duplication; handler accurately triggers an HTTP 409 Conflict protocol. \\
+TC04 & Unauthenticated \texttt{GET /api/market} request demanding global pricing arrays & HTTP 200 OK; a complete raw JSON array of recent crop prices is securely transmitted. & Pass \\
 \addlinespace
-TC20 & Escalation & Basic-tier Farmer attempts to utilize a valid token to perform \texttt{POST /api/admins}. & Authorization interceptors actively analyze the token hierarchy, preventing administrative escalation by returning HTTP 403. \\
+TC05 & Appending \texttt{?crop=Rice} query filter parameters onto a standard market \texttt{GET} string & HTTP 200 OK; the persistence layer surgically filters the JSON array exclusively outputting Rice data. & Pass \\
+\addlinespace
+TC06 & Construct valid REST \texttt{POST /api/market} request alongside an administrative JWT string & HTTP 201 Created; the database strictly commits the new pricing entry. & Pass \\
+\addlinespace
+TC07 & Unauthorized Farmer attempts to inject a \texttt{POST /api/market} execution command & The middleware interceptor rapidly isolates the violation, returning HTTP 403 Forbidden. & Pass \\
+\addlinespace
+TC08 & Client fires \texttt{GET /api/weather?locations=Palakkad} & HTTP 200 OK; live API or offline database returns relevant weather matrices. & Pass \\
+\addlinespace
+TC09 & Interrogate the system alerts channel via \texttt{GET /api/weather/alerts} & HTTP 200 OK; application identifies and parses any active location tagged with \texttt{is\_extreme}. & Pass \\
+\addlinespace
+TC10 & Transmit \texttt{GET /api/advisory?crop=Rice\&season=Kharif} structural queries & HTTP 200 OK; the database applies bidirectional filtering to extract specific operational advice. & Pass \\
+\addlinespace
+TC11 & Farmer fires \texttt{GET /api/advisory/for-farmer} carrying an authenticated token & HTTP 200 OK; logic seamlessly extracts user profile preferences, yielding bespoke data without manual filters. & Pass \\
+\addlinespace
+TC12 & Initiating a \texttt{POST /api/queries} workflow while transmitting a farmer JWT & HTTP 201 Created; a relational query record is initialized under an explicitly \textit{pending} status. & Pass \\
+\addlinespace
+TC13 & Administrator executes a \texttt{PUT /api/queries/:id/respond} command bridging an answer string & HTTP 200 OK; the database securely updates the targeted query ticket with the expert answer. & Pass \\
+\addlinespace
+TC14 & Initiating a \texttt{GET /api/farmers/me} using an established farmer JWT authentication string & HTTP 200 OK; the persistence tier locates and serves the specific localized user profile arrays. & Pass \\
+\addlinespace
+TC15 & Initiating an authorized dashboard \texttt{GET /api/stats} action sequence & HTTP 200 OK; comprehensive database summarizations, counters, and extreme alert indices are provided. & Pass \\
 
-\end{longtable}
+\end{longtable}\endgroup
+
+\subsection{Boundary and Negative Test Cases}
+Negative testing aggressively challenges the software paradigm, assessing whether the logic accurately catches, prevents, or bypasses intentional structural violations or deliberate resource deprivations without triggering fatal system crashes.
+
+\begingroup\footnotesize\begin{longtable}{>{\bfseries}p{0.08\textwidth} p{0.41\textwidth} p{0.39\textwidth} p{0.08\textwidth}}
+\caption{Boundary and Negative Scenario Emulations} \label{tab:negative_tests} \\
+\toprule
+TC ID & Scenario Input Description & Expected Structural Outcome & Result \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\toprule
+TC ID & Scenario Input Description & Expected Structural Outcome & Result \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+TC16 & Request submitted targeted closely at a protected routing endpoint totally lacking an HTTP \texttt{Authorization} bearer token string. & The core router blocks progress, universally returning HTTP 401 Unauthorized. & Pass \\
+\addlinespace
+TC17 & Deliberately trigger weather data compilation with a malformed or omitted external API key. & The connection dynamically fails over to the persistence layer, rendering offline database fallback data via HTTP 200. & Pass \\
+\addlinespace
+TC18 & User executes a GET command targeting \texttt{/api/nonexistent} structural paths. & Unroutable parameters terminate gracefully; the system replies strictly returning a generic HTTP 404 Not Found error. & Pass \\
+\addlinespace
+TC19 & Command dispatched to \texttt{POST /api/auth/farmer/register} forcefully injecting an identical phone number already mapped. & Relational rules forbid duplication; handler accurately triggers an HTTP 409 Conflict protocol. & Pass \\
+\addlinespace
+TC20 & Basic-tier Farmer attempts to utilize a valid token to perform \texttt{POST /api/admins}. & Authorization interceptors actively analyze the token hierarchy, preventing administrative escalation by returning HTTP 403. & Pass \\
+
+\end{longtable}\endgroup

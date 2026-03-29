@@ -1,56 +1,49 @@
-\contentsline {chapter}{Abstract}{6}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Background}{7}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Objectives}{7}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Scope}{8}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Problem Statement}{10}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Initial Problem Statement}{10}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Refined Problem Statement}{11}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Requirement Analysis}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Functional Requirements}{12}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Non-Functional Requirements}{13}{section.3.2}%
-\contentsline {section}{\numberline {3.3}SDG Alignment}{14}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Feasibility Study}{15}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Technical Feasibility}{15}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Economic Feasibility}{15}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Conclusion}{17}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Software Requirement Specification (SRS)}{18}{chapter.5}%
-\contentsline {section}{\numberline {5.1}System Overview}{18}{section.5.1}%
-\contentsline {section}{\numberline {5.2}System Features}{18}{section.5.2}%
-\contentsline {section}{\numberline {5.3}External Interface Requirements}{19}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Assumptions}{20}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Constraints}{20}{section.5.5}%
-\contentsline {chapter}{\numberline {6}System Design}{22}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Architectural Overview}{22}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Architecture Diagram}{22}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Module Design}{23}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Database Schema}{23}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Cohesion Analysis}{24}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Coupling Analysis}{24}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Design Justification}{25}{section.6.7}%
-\contentsline {chapter}{\numberline {7}UML Diagrams}{26}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Use Case Diagram}{26}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Class Diagram}{27}{section.7.2}%
-\contentsline {chapter}{\numberline {8}Coding Strategy}{30}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Language and Runtime environment}{30}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Frameworks and Libraries}{30}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Project Architecture Structure}{31}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Coding Standards}{32}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Representative Implementation Code}{32}{section.8.5}%
-\contentsline {chapter}{\numberline {9}Testing Strategy}{34}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Testing Approach}{34}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Functional Test Cases}{34}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Boundary and Negative Test Cases}{37}{section.9.3}%
-\contentsline {chapter}{\numberline {10}Deployment Plan}{39}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Deployment Environment}{39}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Local Deployment Steps}{39}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Cloud Deployment Implementation}{40}{section.10.3}%
-\contentsline {section}{\numberline {10.4}Ongoing System Maintenance}{40}{section.10.4}%
-\contentsline {chapter}{\numberline {11}Reflection and Learning Outcomes}{41}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Challenges Faced}{41}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Client Interaction and Requirement Elicitation}{42}{section.11.2}%
-\contentsline {section}{\numberline {11.3}Lessons Learned}{42}{section.11.3}%
-\contentsline {section}{\numberline {11.4}Learning Outcomes}{42}{section.11.4}%
-\contentsline {chapter}{References}{43}{chapter*.7}%
-\contentsline {section}{References}{44}{chapter*.8}%
-\contentsline {chapter}{\numberline {A}Product Screenshots}{45}{appendix.A}%
+\contentsline {section}{Abstract}{6}{Doc-Start}%
+\contentsline {section}{\numberline {1}Introduction}{7}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Background}{7}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Objectives}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Scope}{8}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Problem Statement}{9}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Initial Problem Statement}{9}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Refined Problem Statement}{10}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Requirement Analysis}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Functional Requirements}{10}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Feasibility Study}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Technical Feasibility}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Economic Feasibility}{11}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Conclusion}{13}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Software Requirement Specification (SRS)}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}System Overview}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}System Features}{13}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Assumptions}{14}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Constraints}{14}{subsection.5.4}%
+\contentsline {section}{\numberline {6}System Design}{15}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Architectural Overview}{15}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Architecture Diagram}{15}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Module Design}{16}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Cohesion Analysis}{16}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Coupling Analysis}{17}{subsection.6.5}%
+\contentsline {section}{\numberline {7}UML Diagrams}{17}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Use Case Diagram}{17}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Class Diagram}{19}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Coding Strategy}{20}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Programming Language environment}{20}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Tools Used}{20}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Project Architecture Structure}{21}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Coding Standards}{22}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Representative Implementation Code}{22}{subsection.8.5}%
+\contentsline {section}{\numberline {9}Testing Strategy}{23}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Testing Approach}{23}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Functional Test Cases}{23}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Boundary and Negative Test Cases}{25}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Deployment Plan}{25}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Deployment Environment}{25}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Local Deployment Steps}{26}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Cloud Deployment Implementation}{26}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Ongoing System Maintenance}{27}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Reflection and Learning Outcomes}{27}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Challenges faced during client interaction}{27}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Lessons learned}{28}{subsection.11.2}%
+\contentsline {section}{\numberline {12}References}{29}{section.12}%
+\contentsline {section}{References}{29}{section.12}%
+\contentsline {section}{\numberline {13}Appendix A -- Product Screenshots}{29}{section.13}%

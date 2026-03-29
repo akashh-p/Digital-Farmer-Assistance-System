@@ -1,4 +1,4 @@
-\section{Deployment Environment}
+\subsection{Deployment Environment}
 Transitioning the Digital Farmer Assistance System from a local development environment to a robust production infrastructure assumes several baseline environmental prerequisites to maintain continuous operational stability.
 
 \begin{itemize}
@@ -8,7 +8,7 @@ Transitioning the Digital Farmer Assistance System from a local development envi
     \item \textbf{Web Server / Reverse Proxy:} The native Express.js process exclusively handles HTTP routing and serves static layout files from the \texttt{public/} directory. For production-tier deployment, an Nginx reverse proxy layer is strictly advised to correctly terminate SSL certificates via certbot and port-forward requests securely.
 \end{itemize}
 
-\section{Local Deployment Steps}
+\subsection{Local Deployment Steps}
 Initializing a development or localized testing environment requires the sequential execution of the following rigid configurational mandates:
 \begin{enumerate}
     \item \textbf{Prerequisite Acquisition:} Ensure comprehensive installations of Node.js v18+ and MySQL 8.0 exist on the local workstation.
@@ -19,7 +19,7 @@ Initializing a development or localized testing environment requires the sequent
     \item \textbf{Client Access:} Navigate any standard web browser cleanly to \texttt{http://localhost:3000} to render the frontend portal interface.
 \end{enumerate}
 
-\section{Cloud Deployment Implementation}
+\subsection{Cloud Deployment Implementation}
 Deploying the platform for continuous, broad internet accessibility involves abstracting local prerequisites into managed cloud architectures.
 \begin{itemize}
     \item \textbf{PaaS Platform Selection:} Low-friction Platform as a Service (PaaS) providers—such as Railway.app, Render.com, or Fly.io—are targeted. These services natively incorporate Node.js containerization.
@@ -27,7 +27,7 @@ Deploying the platform for continuous, broad internet accessibility involves abs
     \item \textbf{Managed Database Strategies:} The schema persistence tier is dynamically hosted using managed Database-as-a-Service providers like AWS RDS Free Tier or direct planetScale integrations to assure continuous uptime.
 \end{itemize}
 
-\section{Ongoing System Maintenance}
+\subsection{Ongoing System Maintenance}
 Sustained operability dictates rigorous application maintenance post-deployment.
 \begin{itemize}
     \item \textbf{Cryptographic Rotation:} The \texttt{JWT\_SECRET} key will undergo periodic cyclical rotation. Updating the environment variable and cycling the node service automatically invalidates old tokens forcing a security login refresh.

@@ -7,22 +7,36 @@
 
 This skill instructs an AI agent to generate a **complete, well-structured, editable LaTeX report** for the Software Engineering Micro Project (Course Code: PECST411) based on the Digital Farmer Assistance System project.
 
-**Root directory:** `docs/`
+**Root directory:** `/home/jithu/projects/se/` (or the project root)
 
 **Directory layout:**
 ```
-docs/
-├── format/                        ← Report instructions & template PDFs/DOCX
-│   ├── report_instruction.pdf
-│   ├── report_template.pdf
-│   ├── SE_MicroProject_Instructions.docx
-│   └── SE_MicroProject_Report_Template.docx
-├── images/                        ← Project screenshots (may be empty)
-├── presentation/
-│   └── SE SLIDES.pdf              ← Slide deck used during presentation
-├── report/                        ← OUTPUT DIRECTORY — write all .tex files here
-└── skill/
-    └── SKILL.md                   ← This file
+
+.
+├── docs/                          ← Project documentation & report generation
+│   ├── format/                    ← Report instructions & template PDFs/DOCX
+│   │   ├── report_instruction.pdf
+│   │   ├── report_template.pdf
+│   │   ├── SE_MicroProject_Instructions.docx
+│   │   └── SE_MicroProject_Report_Template.docx
+│   ├── images/                    ← Project screenshots (may be empty)
+│   ├── presentation/              ← Slide deck used during presentation
+│   │   └── SE SLIDES.pdf
+│   ├── report/                    ← OUTPUT DIRECTORY — write all .tex files here
+│   └── skill/
+│       └── SKILL.md               ← This file
+├── setup/                         ← Database setup and initialization scripts
+└── src/                           ← Source code for the web application
+    ├── README.md                  ← Project documentation
+    ├── server.js                  ← Express entry point
+    ├── db.js                      ← MySQL connection pool
+    ├── schema.sql                 ← Database schema
+    ├── .env.example               ← Config template
+    ├── Dockerfile                 ← Docker image definition
+    ├── docker-compose.yml         ← Docker services orchestration
+    ├── middleware/                ← Express middleware
+    ├── routes/                    ← API route handlers
+    └── public/                    ← Frontend static assets
 ```
 
 ---
@@ -66,7 +80,7 @@ Extract and note all content that appears in the slides, including:
 ### Step 0.3 — Read the project README
 
 ```
-Read: docs/README.md   (or the project root README.md if present)
+Read: src/README.md
 ```
 
 Extract and note:
@@ -851,7 +865,7 @@ STEP  ACTION
  1    Read docs/format/report_instruction.pdf
  2    Read docs/format/report_template.pdf
  3    Read docs/presentation/SE SLIDES.pdf
- 4    Read docs/README.md (project root)
+ 4    Read src/README.md (project root)
  5    List docs/images/ — note available screenshots
  6    Create docs/report/preamble.tex
  7    Create docs/report/main.tex

@@ -1,0 +1,1910 @@
+NSS College of Engineering Palakkad
+Department of Computer Science and Engineering
+
+Software Engineering Micro Project Report
+Course Code: PECST411
+Course Name: Software Engineering
+Programme: B.Tech Computer Science and Engineering
+Semester: S4
+
+Project Title:
+
+Digital Farmer Assistance System
+
+Team Members:
+1. [Name 1]
+2. [Name 2]
+3. [Name 3]
+4. [Name 4]
+5. [Name 5]
+
+Batch: A / B
+
+Submission Date:
+
+Contents
+Abstract
+
+6
+
+1 Introduction
+1.1 Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Scope . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+7
+7
+7
+8
+
+2 Problem Statement
+2.1 Initial Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Refined Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+10
+10
+11
+
+3 Requirement Analysis
+3.1 Functional Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2 Non-Functional Requirements . . . . . . . . . . . . . . . . . . . . . . . .
+3.3 SDG Alignment . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+12
+12
+13
+14
+
+4 Feasibility Study
+4.1 Technical Feasibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2 Economic Feasibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+15
+15
+15
+17
+
+5 Software Requirement Specification (SRS)
+5.1 System Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.2 System Features . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.3 External Interface Requirements . . . . . . . . . . . . . . . . . . . . . . .
+5.4 Assumptions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.5 Constraints . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+18
+18
+18
+19
+20
+20
+
+6 System Design
+6.1 Architectural Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.2 Architecture Diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.3 Module Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6.4 Database Schema . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+22
+22
+22
+23
+23
+
+2
+
+Digital Farmer Assistance System
+
+6.5
+6.6
+6.7
+
+PECST411 — SE Micro Project
+
+Cohesion Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Coupling Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Design Justification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+24
+24
+25
+
+7 UML Diagrams
+7.1 Use Case Diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7.2 Class Diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+26
+26
+28
+
+8 Coding Strategy
+8.1 Language and Runtime environment . . . . . . . . . . . . . . . . . . . . .
+8.2 Frameworks and Libraries . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8.3 Project Architecture Structure . . . . . . . . . . . . . . . . . . . . . . . . .
+8.4 Coding Standards . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8.5 Representative Implementation Code . . . . . . . . . . . . . . . . . . . . .
+
+31
+31
+31
+32
+33
+33
+
+9 Testing Strategy
+9.1 Testing Approach . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.2 Functional Test Cases . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9.3 Boundary and Negative Test Cases . . . . . . . . . . . . . . . . . . . . . .
+
+35
+35
+35
+38
+
+10 Deployment Plan
+10.1 Deployment Environment . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10.2 Local Deployment Steps . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10.3 Cloud Deployment Implementation . . . . . . . . . . . . . . . . . . . . . .
+10.4 Ongoing System Maintenance . . . . . . . . . . . . . . . . . . . . . . . .
+
+40
+40
+40
+41
+41
+
+11 Reflection and Learning Outcomes
+11.1 Challenges Faced . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11.2 Client Interaction and Requirement Elicitation . . . . . . . . . . . . . . . .
+11.3 Lessons Learned . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11.4 Learning Outcomes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+42
+42
+43
+43
+43
+
+References
+References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+44
+45
+
+A Product Screenshots
+
+46
+
+3
+
+List of Figures
+6.1
+
+Four-Layer Architecture of the System . . . . . . . . . . . . . . . . . . . .
+
+22
+
+7.1
+7.2
+
+System Use Case Diagram . . . . . . . . . . . . . . . . . . . . . . . . . .
+System Class Diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+27
+29
+
+A.1 Farmer Login Interface: Mobile-first phone number and password authentication form. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.2 Admin Login Interface: Email and password form mapped exclusively for
+administrator user access tracking. . . . . . . . . . . . . . . . . . . . . . .
+A.3 Farmer Dashboard: Unified data stream rendering specific crop advisories,
+an integrated 5-day weather forecast, and local market price summary cards.
+A.4 Market Prices Module: Searchable and highly filterable data table rendering
+recent crop prices tagged with the active date and source market coordinates.
+A.5 Weather Module: Rendered 5-day localized weather sequence showcasing
+the automated alert banners dynamically triggered by external extreme weather
+metric flags. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.6 Crop Advisory Module: Rendered layout featuring season-filtered advisory
+content dynamically leveraging the application’s native multilingual database
+translation labels. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.7 Query Submission Form: Interactive module utilized by farmers to directly
+submit agricultural issue reports explicitly requesting expert administrative
+resolutions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+A.8 Admin Panel Architecture: Backend CRUD (Create, Read, Update, Delete)
+portal exclusively used by administrative profiles to constantly manage advisory flows and market price points. . . . . . . . . . . . . . . . . . . . . .
+
+4
+
+46
+47
+47
+48
+
+48
+
+49
+
+49
+
+50
+
+List of Tables
+3.1
+3.2
+
+Functional Requirements of the Digital Farmer Assistance System . . . . .
+Non-Functional Requirements of the System . . . . . . . . . . . . . . . . .
+
+12
+13
+
+6.1
+6.2
+
+System Module Design Mapping . . . . . . . . . . . . . . . . . . . . . . .
+Relational Database Schema Definition . . . . . . . . . . . . . . . . . . . .
+
+23
+24
+
+8.1
+
+Primary Third-Party Dependencies . . . . . . . . . . . . . . . . . . . . . .
+
+32
+
+9.1
+9.2
+
+System Functional Test Cases . . . . . . . . . . . . . . . . . . . . . . . . .
+Boundary and Negative Scenario Emulations . . . . . . . . . . . . . . . . .
+
+36
+38
+
+5
+
+Abstract
+
+The Digital Farmer Assistance System addresses the critical information gap faced by smallscale farmers in rural areas by providing a centralized platform for essential agricultural data.
+Traditional farming operations often suffer from poor resource management due to inaccessible or delayed market trends, volatile weather patterns, and unverified crop guidance. This
+project presents a web-based portal developed to deliver real-time, validated crop-specific
+agricultural advisories, local market price updates, and a five-day localized weather forecasting mechanism integrated with extreme weather alerts. Built on a four-tier architecture
+featuring a Node.js runtime, an Express.js server, and a MySQL database backend, the system emphasizes scalability and low-latency access over varied bandwidths. The frontend
+provides a mobile-first user interface tailored to accessibility constraints. The implementation features a role-based access control paradigm separating farmer and administrative
+interfaces, ensuring secure and private user interactions. A core component of the system
+is the expert query resolution module, bridging the gap between agronomists and farmers. Functionalities including multilingual database-level support and robust offline fallback
+database pathways cater particularly to communities with disparate levels of digital literacy and unreliable connectivity. As a result, the platform aims to empower farmers through
+data-driven decisions that will simultaneously improve crop yields and promote sustained
+financial stability.
+
+6
+
+Chapter 1:
+
+1.1
+
+Introduction
+
+Background
+
+The agricultural sector remains a cornerstone of the Indian economy, employing a substantial
+portion of the rural population and contributing significantly to the national gross domestic
+product. Despite its critical importance, the sector is plagued by systemic inefficiencies,
+primarily stemming from a profound information asymmetry. Small-scale farmers, who
+constitute the vast majority of the agricultural workforce, frequently operate in information
+silos. They are largely disconnected from real-time data regarding optimal farming practices,
+volatile market price fluctuations, and rapidly changing micro-climatic conditions.
+This digital divide in rural areas exacerbates the vulnerability of farmers. Traditional
+decision-making processes rely heavily on anecdotal experience or delayed information cascaded through informal networks. Consequently, crop yields are often suboptimal due to
+misaligned planting schedules, unmanaged pest outbreaks, or inappropriate fertilizer application. Furthermore, the lack of transparent, real-time access to regional market prices
+leaves farmers susceptible to exploitation by intermediaries, resulting in diminished financial returns. Compounding these challenges is the increasing unpredictability of weather
+patterns driven by global climate change. Without highly localized and timely weather forecasts, farmers are unable to take preemptive measures against extreme weather events such
+as sudden torrential rains or prolonged dry spells, often leading to devastating crop losses.
+The integration of modern information and communication technologies (ICT) into the agricultural workflow is therefore not just beneficial, but an urgent necessity to bridge this information gap and foster sustainable agricultural development.
+1.2
+
+Objectives
+
+The primary objective of this project is to architect and deploy a comprehensive, accessible
+digital ecosystem tailored to the needs of the modern farmer. Specifically, the system aims
+to:
+1. Provide real-time, validated crop-specific agricultural advisories that are dynamically
+tailored to the current growth stage of the crop and the prevailing agricultural season.
+2. Deliver live, daily-updated market price information sourced directly from regional
+
+7
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+and local markets to empower farmers during financial negotiations and sales planning.
+3. Offer highly localized, five-day weather forecasts integrated with automated alert
+mechanisms to warn users of impending extreme weather conditions, thereby enabling
+proactive crop protection.
+4. Enable an interactive query resolution module, allowing farmers to submit specific
+agricultural problems or photographs of crop diseases directly to agricultural experts
+for personalized guidance.
+5. Support broad accessibility through a mobile-first, multilingual interface designed
+specifically for rural user bases with varying levels of digital literacy and potentially
+unstable internet connectivity.
+1.3
+
+Scope
+
+The scope of the Digital Farmer Assistance System encompasses a fully functional, webbased platform optimized for mobile access. The system is engineered around two primary
+user roles: the Farmer and the Administrator (inclusive of a Superadmin sub-role for privileged platform configuration).
+From a technical perspective, the application is developed using a modern web development stack consisting of a Node.js runtime environment, Express.js for the backend server
+architecture, and a robust MySQL 8.0 database for persistent data storage. The frontend is
+constructed using responsive HTML, CSS, and Vanilla JavaScript to ensure minimal load
+times on low-bandwidth networks.
+A critical component of the system’s scope is its integration with external services,
+specifically the OpenWeatherMap API, to fetch live meteorological data. Importantly, the
+scope includes a sophisticated database fallback strategy to ensure continued operational
+capability even when external API connectivity is interrupted. Additionally, the system provides integrated multilingual support implemented directly at the database level, allowing
+advisory content and interface elements to be served in the user’s preferred regional language without necessitating complex application-layer internationalization frameworks.
+Report Organisation The remainder of this document is organized to systematically detail the software engineering lifecycle of the project. Chapter 3 critically evaluates the initial
+problem statement, identifying ambiguities and presenting a refined formulation. Chapter 4 provides a comprehensive requirement analysis, delineating both functional and nonfunctional requirements alongside an assessment of the project’s alignment with the United
+Nations Sustainable Development Goals. Chapter 5 discusses the multi-dimensional feasibility study undertaken prior to project commencement. Chapter 6 presents the formal
+Software Requirement Specification (SRS). Chapter 7 explores the architectural and system
+8
+
+design, including the rationale for the selected software patterns. Chapter 8 visualizes the
+system’s behavioral and structural models through UML diagrams. Chapter 9 outlines the
+adopted coding strategy and environment setup. Chapter 10 details the comprehensive testing strategy and specific test cases executed. Chapter 11 provides a concrete deployment
+plan for transitioning the application to a production environment. Finally, Chapter 12 offers a reflective analysis of the challenges encountered and the learning outcomes achieved
+throughout the project development lifecycle.
+
+Chapter 2:
+
+2.1
+
+Problem Statement
+
+Initial Problem Statement
+
+Farmers currently lack timely and reliable access to localised crop advisory, real-time market
+prices, and critical weather information. This profound information gap results in inefficient
+farming practices, significantly reduced crop yields, and increased financial vulnerability
+due to unpredictable market volatility and increasingly erratic weather patterns. Without a
+centralized, accessible platform to consolidate this disparate data, decision-making remains
+reactive rather than data-driven, severely limiting the economic mobility and operational
+resilience of small-scale agricultural communities.
+Ambiguities, Inconsistencies, and Incompleteness Identified Upon critical evaluation of
+the initial problem statement, several substantial flaws and areas requiring clarification were
+identified. Formalizing the software requirements necessitated a thorough deconstruction of
+these issues.
+Ambiguities
+• The phrase “timely access” is overly subjective and lacks measurable criteria. It does
+not specify whether the updates should be provided in real-time (instantaneously), on
+an hourly basis, or via a daily batch process.
+• The term “market prices” fails to define the geographic scope of the data. It is ambiguous whether the system should aggregate national commodity exchange rates, statelevel averages, or prices from highly localized regional mandis (markets).
+Inconsistencies
+• The initial statement emphasizes “reliable access” but provides no mechanism for
+how the data (especially crowdsourced or admin-entered advisories) will be vetted,
+9
+
+validated, or maintained for data integrity.
+• There is a contradiction involving the target demographic: asserting the need for constant access to live data while implicitly serving rural areas known for intermittent and
+unreliable internet connectivity. No offline or low-bandwidth strategy was explicitly
+detailed.
+• Although the system aims to improve farmers’ financial standing, there is no mention
+of the secure handling of their personal and geographic profiles, leading to inconsistent
+application of data privacy standards.
+Incompleteness
+• The requirement for “weather information” does not specify the delivery mechanism—whether alerts require the user to actively check the platform or if the system
+will passively push automated warnings to the user during extreme meteorological
+events.
+• The problem statement ignores the multilingual necessity of the target audience. Presenting complex agricultural data solely in English would render the platform unusable
+for the majority of the intended user base.
+2.2
+
+Refined Problem Statement
+
+Addressing the identified shortcomings, the problem statement was systematically restructured to provide clear, actionable, and measurable engineering objectives.
+Refined Problem Statement: To design, develop, and deploy a secure, web-based Digital Farmer Assistance System that centralises disparate agricultural data streams. The system
+must provide:
+• Real-time synchronisation of localized regional market prices and five-day weather
+forecasts (augmented by a database fallback mechanism for low-connectivity scenarios).
+• Curated, validated, and season-specific crop advisories delivered through a mobilefirst, multilingual user interface tailorable to varying levels of digital literacy.
+• An interactive query resolution pipeline connecting farmers with administrative agricultural experts.
+Goal: To systematically eliminate information asymmetry within the rural agricultural
+sector, thereby allowing operators to execute data-driven, preemptive decisions that mea-
+
+10
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+surably enhance crop productivity and ensure financial sustainability within constrained,
+low-bandwidth environments.
+
+Chapter 3:
+
+3.1
+
+Requirement Analysis
+
+Functional Requirements
+
+Functional requirements represent the specific behavioral functions that the system must
+perform to satisfy the user’s needs. The core capabilities of the Digital Farmer Assistance
+System are explicitly defined to track user interactions and data processing workflows.
+Table 3.1: Functional Requirements of the Digital Farmer Assistance System
+FR ID
+
+Description
+
+FR1
+
+User Management: The system shall allow farmers to se- High
+curely register, authenticate, and manage personalized profiles, including the selection of preferred crop types and geographic regions.
+
+FR2
+
+Advisory Engine: The system shall dynamically filter and High
+provide crop-specific agricultural guidance based on the inputted growth stage, prevailing season, and the farmer’s declared preferences.
+
+FR3
+
+Information Retrieval: The system shall aggregate and High
+display daily updated market prices from various regional
+markets, alongside localized 5-day weather forecasts utilizing external API integrations.
+
+FR4
+
+Alert System: The system shall continuously monitor in- High
+coming meteorological data and push automated notifications or visual highlights on the dashboard for extreme
+weather warnings.
+
+FR5
+
+Admin Control: The system shall provide a comprehen- High
+sive, secure dashboard for administrators to perform CRUD
+(Create, Read, Update, Delete) operations on market prices,
+weather data, and advisory content.
+
+Priority
+
+Continued on next page
+11
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Table 3.1 – Continued from previous page
+
+3.2
+
+FR ID
+
+Description
+
+FR6
+
+Interaction Module: The system shall encompass a dedi- Medium
+cated query resolution module allowing farmers to submit
+textual descriptions of agricultural issues to registered experts for tailored responses.
+
+Priority
+
+Non-Functional Requirements
+
+Non-functional requirements dictate the quality attributes, performance constraints, and architectural characteristics of the platform, ensuring it operates effectively within its intended
+real-world context.
+Table 3.2: Non-Functional Requirements of the System
+NFR ID
+
+Category
+
+Description
+
+NFR1
+
+Performance
+
+The platform must be stringently optimized to load
+essential text and layout data within 2 seconds over
+standard 2G or unstable low-bandwidth cellular connections indicative of rural areas.
+
+NFR2
+
+Availability
+
+The system architecture shall be designed to maintain 99.9% uptime, ensuring 24/7 availability of critical fallback data even during third-party API outages.
+
+NFR3
+
+Usability
+
+The user interface must strictly adhere to “MobileFirst” design principles, incorporating high-contrast
+typography and intuitive iconography suited for users
+with varying levels of digital literacy.
+
+NFR4
+
+Accessibility
+
+The system shall implement internationalization support at the database level to natively render advisories
+in at least three regional languages in addition to English.
+
+NFR5
+
+Scalability
+
+The software architecture must support a concurrent
+user increase of at least 20% annually without experiencing measurable performance degradation or requiring fundamental codebase refactoring.
+Continued on next page
+
+12
+
+Table 3.2 – Continued from previous page
+
+3.3
+
+NFR ID
+
+Category
+
+Description
+
+NFR6
+
+Security
+
+All sensitive user profiling data must be encrypted at
+rest, and all inter-node communication must be secured. Authentication shall rely on industry-standard
+stateless JWTs and bcrypt cryptographic hashing.
+
+SDG Alignment
+
+The design, implementation, and deployment of the Digital Farmer Assistance System are
+fundamentally aligned with the United Nations Sustainable Development Goals (SDGs),
+ensuring the software delivers measurable global impact.
+SDG 8 – Decent Work and Economic Growth
+The platform directly contributes to the economic empowerment of small-scale agricultural
+workers by dismantling information monopolies. By providing farmers with unmediated,
+direct access to daily market pricing trends, the system eradicates the reliance on predatory
+middlemen. This transparency significantly elevates the income potential of marginalized
+farmers, fostering an environment where agricultural labor equates to fair, decent economic
+growth and improved financial autonomy.
+SDG 9 – Industry, Innovation, and Infrastructure
+The deployment of this system embodies the innovative utilization of modern digital infrastructure to modernize traditional, analog agricultural practices. By leveraging cloud computing, mobile technologies, and external data APIs, the system introduces cutting-edge industrial innovation to rural environments that are traditionally underserved by technological
+advances. It establishes a resilient digital connective tissue that enhances rural technological
+
+13
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+infrastructure, thereby fulfilling the core mandate of SDG 9.
+
+Chapter 4:
+
+4.1
+
+Feasibility Study
+
+Technical Feasibility
+
+Technical feasibility assesses whether the proposed system can be practically implemented
+using currently accessible technologies, given the defined constraints and performance criteria. The Digital Farmer Assistance System is highly technically feasible. The entire backend architecture is heavily reliant on mature, battle-tested web technologies, primarily a
+Node.js runtime operating an Express.js server, communicating with a MySQL 8.0 relational
+database. This combination ensures high throughput and stability for concurrent I/O operations. Furthermore, the integration capabilities required for third-party weather data via the
+OpenWeatherMap REST API are straightforward, operating well within the provider’s freetier limitations of 60 calls per minute. The required multilingual capabilities do not necessitate complex external localization libraries; instead, they are efficiently managed natively
+within the MySQL database through an indexed language attribute within the ADVISORY
+table. Essential security protocols, including JSON Web Token (JWT) authentication for
+stateless session management and bcrypt for cryptographic password hashing, are readily
+implemented via established Node.js modules. The architecture intentionally avoids hardware dependencies outside of standard client devices and omits unproven experimental AI
+models, thereby minimizing technical complexity risks. Finally, a robust fallback caching
+paradigm mitigates the risk of external API downtime, cementing the overarching technical
+viability of the platform.
+4.2
+
+Economic Feasibility
+
+Economic feasibility evaluates the cost-benefit ratio associated with the development, deployment, and long-term maintenance of the software compared against the tangible financial improvements provided to the end-users. The underlying infrastructure heavily favors a
+low-cost implementation. The entire technology stack—Node.js, Express, and MySQL—is
+open-source, resulting in zero initial or recurring proprietary licensing expenditures. Deployment and hosting can be seamlessly managed through cost-effective cloud platform as
+a service (PaaS) providers such as Railway or Render, which offer free prototype tiers and
+inexpensive scaling pathways. From the user’s perspective, hardware acquisition costs are
+negligible; interaction requires only a standard smartphone with a basic web browser and
+14
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+modest internet connectivity, removing the financial barriers typically associated with highend precision agricultural tools. The return on investment (ROI) is substantial: farmers are
+empowered to optimize crop yields through tailored advisory support, maximize profit margins via predictive market timing based on live price metrics, and radically reduce financial
+losses through preemptive interventions following automated extreme weather alerts. Consequently, the project strongly justifies its low inherent development and operational costs
+by delivering massive downstream economic impact.
+Operational Feasibility Operational feasibility determines the ease with which the proposed system can be integrated into the daily workflows of its target demographic, acknowledging their specific socio-technical constraints. The platform is intentionally engineered
+with a mobile-first user interface tailored explicitly for rural operators who may exhibit
+varying degrees of digital literacy. The intuitive, high-contrast visual design guarantees
+that critical metrics—such as volatile market prices or severe weather alerts—are instantly
+comprehensible without demanding sophisticated technical navigation. Operationally, the
+software utilizes an unambiguous role-based access control paradigm. Farmers solely interact with the consumption modules (market data, advisory content, weather metrics, and
+query submission), ensuring an uncluttered, focused cognitive load. Conversely, administrative personnel interact with specialized CRUD interfaces optimized for efficient content management and verification. Additionally, the onboarding friction for new rural users
+is effectively minimized by utilizing their familiar primary identifier—their mobile phone
+number—in conjunction with a secure password, negating the requirement for cumbersome
+email-centric registration workflows. The operational integration of the system is thus both
+simple and culturally congruent.
+Schedule Feasibility Schedule feasibility analyzes the probability that the final software
+product can be successfully designed, engineered, tested, and deployed within the strict
+designated timeframe available for the S4 semester Software Engineering Micro Project.
+The project is confirmed to be schedule-feasible. The architectural decomposition of the
+system into completely independent modules (e.g., routes/auth.js, routes/market.js,
+routes/weather.js, routes/advisory.js) acts as a catalyst for parallel development
+execution. Distinct teams or developers can concurrently build and isolate their respective
+components without blocking dependencies. The standardized RESTful API contracts allow
+frontend and backend implementations to proceed simultaneously. Furthermore, individual
+modules can be rigorously unit-tested in isolation well before comprehensive system integration commences, allowing schedule-threatening bugs to be isolated and resolved early in
+the SDLC. The software’s low-coupling foundation ensures that any future requirements or
+unforeseen pivot modifications do not necessitate total system re-architecting, providing a
+vital buffer against schedule overruns.
+
+15
+
+4.3
+
+Conclusion
+
+Drawing upon continuous evaluation across technical, economic, operational, and scheduling dimensions, it is definitively concluded that the implementation of the Digital Farmer
+Assistance System is entirely feasible. The project’s constraints are thoroughly managed
+through strategic technology choices, resulting in a sustainable, high-impact digital platform
+capable of revolutionizing rural agricultural operations.
+
+Chapter 5:
+
+5.1
+
+Software Requirement Specification (SRS)
+
+System Overview
+
+The Digital Farmer Assistance System operates as an integrated web-based platform specifically designed to deliver vital agricultural support mechanisms to rural farmers. The software centralizes critical datasets, offering a cohesive portal providing three primary services:
+dynamic crop advisory mechanisms, verified regional market pricing tracking, and localized
+meteorological forecasting. The ecosystem is meticulously administered and curated by a
+dedicated content management team composed of agricultural experts operating via a specialized secure admin control panel. The system effectively mitigates the rural information
+deficit by providing an accessible, mobile-first centralized dashboard engineered specifically
+for low-bandwidth cellular environments.
+5.2
+
+System Features
+
+The software’s functional scope is demarcated into distinct features, detailing operational
+capabilities provided to the designated users.
+1. User Management and Preferences (FR1): The platform encompasses a comprehensive registration and authentication workflow. Farmers can create, read, update,
+and manage customizable profiles, designating their primary crop portfolios and operational geographic regions. This profile metadata forms the foundational filter mechanism dictating personalized data aggregation throughout the remainder of the application.
+2. Dynamic Advisory Engine (FR2): The system incorporates a business-logic module that parses a farmer’s crop selections and cross-references them with the current
+seasonal timeline. This allows the system to autonomously filter and present highly
+16
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+specific agricultural advisories, ensuring rural users are not inundated with irrelevant
+or out-of-season guidance.
+3. Aggregated Information Retrieval (FR3): A unified dashboard module autonomously
+aggregates data from two disparate streams: live regional market prices provided
+and updated by administrative personnel, alongside a comprehensive, localized 5-day
+weather forecast ingested automatically through secure API integrations.
+4. Automated Alert and Notification System (FR4): The application continuously
+monitors incoming meteorological data for predetermined critical thresholds. Should
+extreme weather conditions be predicted, the system generates automated warnings
+directly to the user’s dashboard interface, highlighting critical operational risks for the
+farmer.
+5. Administrative Control Dashboard (FR5): Privileged users with administrator roles
+are provided an intuitive backend portal. This interface allows for the rapid creation,
+modification, and deletion (CRUD functions) of all system content, including raw
+market prices, static advisories, and overriding fallback weather data.
+6. Expert Interaction Module (FR6): To solve unique agricultural challenges not addressed by static advisories, a bidirectional query interface allows farmers to submit
+free-text questions. Specialized administrative users act as subject matter experts, directly responding to and resolving farmer inquiries through a managed ticket queue
+system.
+5.3
+
+External Interface Requirements
+
+The software depends on specialized interfaces to securely manipulate external datasets and
+reliably interact with end-users.
+User Interfaces
+The primary frontend interface strictly utilizes responsive HTML5, CSS3, and modern Vanilla
+JavaScript, specifically designed to dynamically adapt to varying viewport sizes. The ”mobilefirst” approach is essential as smartphones represent the primary internet access methodology for the target demographic. The interface employs high-contrast iconography and unambiguous navigation mechanics to circumvent digital literacy barriers.
+Hardware Interfaces
+The software framework boasts extreme hardware agnosticism regarding the client-side. The
+application does not require specialized native hardware capabilities; it flawlessly executes
+
+17
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+on any commercial smartphone, tablet, or traditional computer equipped with a modern
+HTML5-compliant web browser.
+Software Interfaces
+The primary software interfaces revolve around external data ingestion and persistence. The
+system communicates bidirectionally via HTTPS utilizing RESTful JSON structures with
+the OpenWeatherMap API for live meteorological data ingestion. Internally, the Node.js
+runtime leverages the mysql2 pipeline interface to communicate executing queries securely
+with the MySQL 8.0 relational database engine.
+Communication Interfaces
+All external client-server communication channels transmit exclusively over encrypted HTTPS
+connections. Authentication and session persistence are stateless, handled entirely via standard JSON Web Tokens (JWT) transmitted as Bearer tokens embedded within the HTTP
+Authorization header for all protected API route endpoints.
+5.4
+
+Assumptions
+
+The successful execution and operation of the software architecture are predicated upon
+several foundational assumptions regarding user environments and technical dependencies.
+1. Users will operate within environments with at least intermittent, low-bandwidth internet connectivity. Total offline scenarios rely strictly on previously cached database
+fallback mechanisms but necessitate occasional synchronization.
+2. The hosting environment will consistently maintain a standard Node.js (v18+) runtime
+ecosystem and an operational MySQL (v8.0+) relational database instance.
+3. A root ’Superadmin’ profile must be securely seeded into the raw database prior to
+deployment to enable the initial platform administration and subsequent staff provisionment.
+4. While the external Weather API key is optimal for live forecasting, its absence is not
+catastrophic; the system assumes a highly functional offline or static demonstration
+mode is permanently configured.
+5.5
+
+Constraints
+
+Constraints define structural boundaries that limit developmental options or restrict operational methodologies.
+
+18
+
+1. The software scope is strictly confined to a web-based architecture. The development
+of distinct native iOS or Android mobile applications is explicitly excluded from the
+current phase.
+2. Live API connectivity is implemented solely for meteorological data. Regional market
+pricing data remains a manual dependency, structurally requiring dedicated administrative curation to maintain accuracy.
+3. Advanced telecommunication integration, such as native SMS push notifications or
+backend mobile alerts, is marked exclusively as future system extensions. Alerts operate structurally at the application level only.
+4. Native software localization mechanics (e.g., i18n libraries) are not utilized. Language
+support is explicitly bounded by the manually seeded multilingual content existing
+within the database fields.
+
+Chapter 6:
+
+6.1
+
+System Design
+
+Architectural Overview
+
+The Digital Farmer Assistance System purposefully adopts a formal four-layer software
+architecture, establishing an explicit separation of computing concerns throughout the application stack. This structural design isolates the user interface semantics from the volatile
+business logic and raw data persistence layers. This separation fundamentally guarantees
+that alterations to the frontend HTML layouts or database schema structures will not necessitate cascading, breaking changes across the entire monolithic codebase. This architecture
+ultimately facilitates cleaner unit testability, highly streamlined debugging, and vastly superior post-deployment maintenance.
+6.2
+
+Architecture Diagram
+
+The functional flow of data between the four primary operational layers is visually formalized via the following structured architectural diagram. Top-down requests initialize logic
+rendering, while bottom-up cascades fulfill data persistence queries.
+
+19
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Presentation Layer (UI)
+Web/Mobile Interface | Multilingual Support | User Profiles
+Business Logic Layer
+Crop Advisory Logic | Weather Alerts | Market Price Processing
+Integration Layer
+Third-Party APIs (OWM, Market) | Authentication Services
+Data Access Layer (Persistence)
+MySQL Database | Static Content Storage
+Figure 6.1: Four-Layer Architecture of the System
+6.3
+
+Module Design
+
+The system logically divides complex backend requirements into distinct, deployable modules, mapped explicitly to discrete implementation files in the codebase.
+Table 6.1: System Module Design Mapping
+Layer
+
+Module
+
+Implementation File
+
+Presentation
+Presentation
+
+User Interface Module
+Multilingual Support Module
+
+Business Logic
+
+User Management Module
+
+Business Logic
+Business Logic
+
+Advisory Engine Module
+Alert Manager Module
+
+Integration
+Integration
+
+Market Price Integration Module
+Weather Service Module
+
+Data Access
+Data Access
+
+Data Persistence Module
+Content Management Module
+
+public/index.html
+DB language attribute + farmer
+preference config
+routes/auth.js,
+middleware/auth.js
+routes/advisory.js
+is extreme
+flag
+in
+WEATHER FORECAST,
+routes/weather.js
+routes/market.js
+routes/weather.js (OWM
+API → DB → mock)
+db.js (mysql2 connection pool)
+Admin CRUD controllers across
+all route files
+
+Module Description Summary: The Presentation Layer dictates responsive HTML lay20
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+outs and processes DB translation strings. The Business Logic layer contains primary logic
+controllers determining weather alert calculations and advisory payload generation. The
+Integration layer contains networking abstractions specifically focused on third-party API
+processing and JWT validation mechanisms. Finally, the Data Access Layer universally
+handles optimized SQL query execution directly to the MySQL cluster.
+6.4
+
+Database Schema
+
+The persistence module is rigorously normalized to minimize data redundancy anomalies
+across six primary relational tables.
+Table 6.2: Relational Database Schema Definition
+Table Name
+
+Primary
+Key
+
+Foreign Keys
+
+Notable Columns
+
+ADMIN
+
+admin id
+
+—
+
+name, email,
+word hash
+
+FARMER
+
+farmer id
+
+—
+
+name, phone, crops, region, language pref
+
+QUERY
+
+query id
+
+farmer id,
+min id
+
+ADVISORY
+
+adv id
+
+admin id
+
+crop type,
+content
+
+season,
+
+language,
+
+MARKET PRICE
+
+price id
+
+admin id
+
+crop name,
+source market, date
+
+price,
+
+—
+
+location,
+temp,
+is extreme, date
+
+condition,
+
+WEATHER FORECAST
+fc id
+
+6.5
+
+ad-
+
+role,
+
+pass-
+
+subject, description, status, response
+
+Cohesion Analysis
+
+Cohesion evaluates the degree to which elements inside an individual module belong logically together. The Digital Farmer Assistance System actively enforces functional cohesion,
+widely regarded as the strongest and most desirable form. The User Management Module is
+strictly confined to executing authentication strategies and profile mutations; it possesses no
+capability to process structural advisories. The Weather and Alert module exclusively computes meteorological data and alert algorithms without manipulating agricultural content.
+This intense functional isolation guarantees vastly superior code readability and ensures individual modules can be autonomously maintained or rewritten entirely without unintended
+21
+
+global behavioral degradation.
+6.6
+
+Coupling Analysis
+
+Coupling measures the degree of functional interdependence or data reliance between discrete modules. Utilizing the layered architectural approach automatically ensures a low coupling environment, predominantly relying exclusively on simple data coupling structures.
+The UI Presentation Layer is incapable of direct persistence access; it must communicate
+structurally through the Business Logic Layer. Furthermore, any volatile alterations originating from the OpenWeatherMap API solely influence the isolated Integration module. This
+protective buffering fundamentally prevents volatile networking changes from polluting or
+crashing the core database execution models, thereby granting extreme system flexibility
+and paving an unambiguous path toward future microservices migration if platform scaling
+demands necessitate such action.
+6.7
+
+Design Justification
+• High Scalability: By actively deploying a rigidly layered architecture, the backend routing and logic structures are perfectly optimized for future migrations, easily
+accommodating cloud-native XaaS (Everything as a Service) operations or Dockerbased horizontal scaling configurations.
+• Superior Maintainability: Critical corrective or perfective maintenance cycles are
+physically isolated to single targeted layers, mitigating the risk of introducing widespread
+functionality regressions during routine updates.
+• Operational Reliability: Complete structural decoupling between the external ingestion integrations and internal frontend render operations ensures that latency spikes or
+total failures in third-party API dependencies will not fundamentally freeze the localized user interface processes.
+
+Chapter 7:
+
+7.1
+
+UML Diagrams
+
+Use Case Diagram
+
+The Use Case Diagram visually describes the behavioral capabilities of the Digital Farmer
+Assistance System from the perspective of its primary actors. This diagram ensures that
+22
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+all high-level functional requirements defined in the SRS are adequately accounted for by
+corresponding system interactions.
+
+Figure 7.1: System Use Case Diagram
+Actors:
+• Farmer: The primary end-user who consumes data and submits queries.
+• Admin (and Superadmin): Personnel responsible for data entry, system modifications, user management, and expert query responses.
+Primary Use Cases:
+1. Farmer Interactions:
+• View Market Prices: The farmer accesses a centralized dashboard displaying the
+latest commodity pricing (<<include>> Secure Login).
+23
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+• View Weather Information: The farmer accesses five-day forecast data localized
+to their defined region (<<include>> Secure Login).
+• View Crop Advisory: The farmer receives personalized data based on pre-registered
+crop types (<<include>> Secure Login).
+• Submit Query: The farmer transmits textual questions directly to agricultural
+experts (<<include>> Secure Login).
+• Manage Profile: The Farmer configures phone numbers, language preferences,
+and crop portfolios (<<include>> Secure Login).
+2. Admin Interactions:
+• Manage Users: Reviewing farmer registrations and editing permission structures.
+• Respond to Queries: Administrating expert answers to farmer-submitted inquiries.
+• Manage Advisory Database: Performing CRUD operations on crop knowledge
+base articles.
+• Manage Market Prices: Entering newly verified commodity pricing metrics natively into the database.
+• Manage Weather Data: Establishing manual weather overrides inside the database
+fallback system.
+7.2
+
+Class Diagram
+
+The Class Diagram delineates the structural framework of the software, explicitly defining
+system objects, their attributes, behavioral methods, and their inter-relationships, thereby
+bridging the conceptual design into actionable object-oriented engineering strategies.
+
+24
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Figure 7.2: System Class Diagram
+Core Class Definitions:
+• User (Abstract Base Class): Centralizes common authentication attributes (userID,
+name, passwordHash) and core methods (login(), logout()).
+• Admin: Inherits User. Attributes include adminRole. Methods encompass authoritative interactions: createAdvisory(), updateMarketPrice(), and respondToQuery().
+
+• Farmer: Inherits User. Extends base class with region and preferredCrops. Specialized methodologies comprise viewAdvisory(), checkMarketPrice(), and getWeatherForeca
+• UserProfile: Managed via composition by the Farmer class. Contains specific
+metadata including languagePreference and phoneNumber, manipulatable via updateProfile().
+• Advisory: Encapsulates structural data: advisoryID, cropType, season, content.
+Accessible via getAdvisoryDetails().
+• Query: Represents the interaction state: queryID, subject, status, and response,
+handled via submitQuery() and updateStatus().
+• MarketPrice & WeatherForecast: Abstraction layers handling external data synchronization, tracking sourceMarket, currentPrice, temperature, and weatherCondition.
+
+25
+
+Strategic Relationships: The software strictly employs hierarchical inheritance for
+shared user functionality (Farmer/Admin ← User). It mandates strong composition mapping
+between the Farmer and their UserProfile (Farmer ⋄ → UserProfile). Looser dependency and
+association relationships govern the dynamic interactions between the Farmer modules and
+rapidly volatile external data objects (Farmer 99K MarketPrice).
+
+Chapter 8:
+
+8.1
+
+Coding Strategy
+
+Language and Runtime environment
+
+The entirety of the Digital Farmer Assistance System is constructed utilizing JavaScript.
+The backend architecture dictates a dedicated Node.js (v18+) runtime environment. Node.js
+is selected explicitly for its non-blocking, asynchronous, event-driven infrastructure, which
+is universally recognized as highly optimal for I/O-heavy networking workloads—such as simultaneously processing dozens of concurrent MySQL database queries and external weather
+API connections without experiencing thread starvation. The frontend ecosystem leverages hyper-efficient Vanilla JavaScript (ES6+), HTML5, and CSS3. By completely excising
+heavy compilation steps or bulky client-side frameworks (e.g., React or Angular), the platform dramatically reduces initial payload sizes, creating a remarkably responsive interface
+optimally tailored for restrictive, low-bandwidth rural cellular environments. The persistence
+layer operates strictly on standard SQL protocols executing within a MySQL 8.0 cluster.
+8.2
+
+Frameworks and Libraries
+
+The system carefully curates a minimalist compilation of proven NPM libraries to accelerate
+development timelines while rigorously enforcing a minimal attack surface.
+
+26
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Table 8.1: Primary Third-Party Dependencies
+Library
+age
+
+8.3
+
+Pack-
+
+Architectural Purpose
+
+Express.js
+
+Provides the foundational HTTP routing server and essential middleware pipeline configurations.
+
+mysql2
+
+Provides an optimized MySQL connection pool natively
+supporting modern async/await syntax.
+
+bcryptjs
+
+Handles cryptographic password hashing protocols, utilizing a robust workload configuration of 10 salt rounds.
+
+jsonwebtoken
+
+Administers all stateless JSON Web Token generation and
+cryptographic validation algorithms.
+
+dotenv
+
+Enables rigorous environment variable management,
+cleanly separating credentials from the raw source code.
+
+cors
+
+Enforces Cross-Origin Resource Sharing security headers
+for strict browser-level access.
+
+Project Architecture Structure
+
+The file repository is rigorously structured to prioritize maintainability and an absolute separation of computing concerns. The hierarchy logically partitions raw configuration, middleware abstractions, and independent data route handlers into isolated, cohesive directories.
+farmer-system/
+|-- server.js
+|-- db.js
+|-- schema.sql
+|-- .env.example
+|-- package-lock.json
+|-- package.json
+|-- middleware/
+|
+\-- auth.js
+|-- routes/
+|
+|-- auth.js
+|
+|-- farmers.js
+|
+|-- market.js
+|
+|-- weather.js
+|
+|-- advisory.js
+
+<- Express entry point
+<- MySQL connection pool
+<- Full database schema + seed data
+<- Config template (copy to .env)
+
+<- JWT authentication middleware
+<- POST /api/auth/farmer/login, /register, /admin/login
+<- GET/PUT/DELETE /api/farmers
+<- GET/POST/PUT/DELETE /api/market
+<- GET/POST/DELETE /api/weather (OWM API + DB fallback)
+<- GET/POST/PUT/DELETE /api/advisory
+27
+
+Digital Farmer Assistance System
+
+|
+|-- queries.js
+|
+\-- admins.js
+\-- public/
+\-- index.html
+8.4
+
+PECST411 — SE Micro Project
+
+<- GET/POST/PUT/DELETE /api/queries
+<- GET/POST/DELETE /api/admins
+<- Full frontend (HTML + CSS + JS)
+
+Coding Standards
+
+Codebase integrity is enforced via a rigid set of programmatic conventions:
+• RESTful Resource Protocols: Endpoints strictly conform to HTTP verb definitions:
+GET for non-destructive reads, POST for record creation, PUT for total updates, and
+DELETE for sanitization.
+• Asynchronous Exception Handling: Asynchronous operations mandate the deployment of encompassing try/catch structures, preventing fatal server termination upon
+localized execution failures.
+• Security Parameters: All database interactions deploy aggressively parameterized
+SQL queries to categorically eradicate SQL injection vulnerabilities. Role-based Access Control (RBAC) validations are securely abstracted into middleware interceptors.
+8.5
+
+Representative Implementation Code
+
+The following abbreviated code excerpt delineates the standard authentication pattern utilized throughout the system. The snippet powerfully demonstrates active SQL parameterization natively mitigating injection vectors, concurrent secure cryptographic comparison
+via bcrypt, and the final generation of an encrypted JSON Web Token for stateless access
+control.
+1
+
+router . post ( ’/ farmer / login ’ , async ( req , res ) = > {
+
+2
+
+const { phone , password } = req . body ;
+
+3
+
+if (! phone || ! password ) return res . status (400) . json ({ error :
+’ phone ␣ and ␣ password ␣ required ’ }) ;
+
+4
+5
+6
+
+try {
+const [ rows ] = await db . execute ( ’ SELECT ␣ * ␣ FROM ␣ FARMER ␣ WHERE
+␣ phone ␣ = ␣ ? ’ , [ phone ]) ;
+
+7
+
+if (! rows . length ) return res . status (401) . json ({ error : ’
+Invalid ␣ credentials ’ }) ;
+
+8
+9
+
+const farmer = rows [0];
+
+10
+
+const match
+
+= await bcrypt . compare ( password , farmer .
+
+password ) ;
+
+28
+
+if (! match ) return res . status (401) . json ({ error : ’ Invalid ␣
+
+11
+
+credentials ’ }) ;
+12
+
+const token = jwt . sign (
+
+13
+
+{ id : farmer . farmer_id , type : ’ farmer ’ , name : farmer . name
+
+14
+
+, region : farmer . region , lang : farmer . language_pref } ,
+process . env . JWT_SECRET || ’ secret ’ , { expiresIn : ’7 d ’ }
+
+15
+16
+
+);
+
+17
+
+res . json ({ token , farmer : { farmer_id : farmer . farmer_id ,
+name : farmer . name , region : farmer . region , language_pref :
+farmer . language_pref } }) ;
+
+18
+
+} catch ( err ) {
+res . status (500) . json ({ error : err . message }) ;
+
+19
+20
+
+}
+
+21
+
+}) ;
+
+Listing 8.1: Implementation of Farmer Authentication Protocol
+
+Chapter 9:
+
+9.1
+
+Testing Strategy
+
+Testing Approach
+
+A comprehensive, multi-tiered testing strategy guarantees the absolute reliability and operational accuracy of the system architecture under varying load parameters. The testing
+protocol leverages three definitive evaluation paradigms:
+1. Unit Testing Framework: Granular validation methodologies are deployed to scrutinize the behavioral accuracy of highly isolated functions—particularly cryptographic
+password hashing mechanisms and JSON web token string generation—independently
+from the broader application state.
+2. Integration Interfaces: Rigorous evaluations analyze the operational handshakes between disparate architectural components. Crucially, integration testing ensures that
+API route handlers perform uninterrupted, synchronous data exchanges accurately
+bridging the Node.js application server, the local MySQL database persistence layer,
+and the external third-party OpenWeatherMap APIs.
+3. System and Usability Testing: Extensive End-to-End (E2E) validations simulate a
+comprehensive farmer usage trajectory. Testing is heavily focused utilizing Chrome
+29
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+DevTools Device Mode to physically emulate low-resolution, mobile-viewport rendering, rigorously validating frontend HTML/CSS resilience and the accuracy of the
+multilingual interface.
+9.2
+
+Functional Test Cases
+
+The core operational pathways governing CRUD capabilities and database interactions are
+validated against defined expected outcomes to actively verify systematic integrity.
+Table 9.1: System Functional Test Cases
+TC ID
+
+Module
+
+Testing Input or Action
+
+TC01
+
+Auth
+
+Valid
+farmer
+phone System returns HTTP
+string
+and
+secret
+pass- 200 OK and a signed
+word submitted via POST JWT bearer token.
+/api/auth/farmer/login
+
+Pass
+
+TC02
+
+Auth
+
+Intentional submission of incor- System halts execution,
+rect password parameters to the returning HTTP 401
+active login endpoint
+Unauthorized.
+
+Pass
+
+TC03
+
+Auth
+
+Authorized administrator email System validates and
+and password injected via POST responds with a JWT
+/api/auth/admin/login
+imbued with an administrative role capability.
+
+Pass
+
+TC04
+
+Market
+
+Unauthenticated
+GET HTTP 200 OK; a com/api/market
+request
+de- plete raw JSON array of
+manding global pricing arrays
+recent crop prices is securely transmitted.
+
+Pass
+
+TC05
+
+Market
+
+Appending ?crop=Rice query HTTP 200 OK; the
+filter parameters onto a standard persistence layer surgimarket GET string
+cally filters the JSON
+array exclusively outputting Rice data.
+
+Pass
+
+TC06
+
+Market
+
+Construct valid REST POST
+/api/market request alongside
+an administrative JWT string
+
+Pass
+
+Expected Outcome
+
+HTTP 201 Created; the
+database strictly commits the new pricing entry.
+
+Status
+
+Continued on next page
+
+30
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Table 9.1 – Continued from previous page
+TC ID
+
+Module
+
+Testing Input or Action
+
+TC07
+
+Market
+
+Unauthorized Farmer attempts The middleware interto inject a POST /api/market ceptor rapidly isolates
+execution command
+the violation, returning
+HTTP 403 Forbidden.
+
+Pass
+
+TC08
+
+Weather
+
+Client
+fires
+GET HTTP
+200
+OK;
+/api/weather?locations=Palakkad
+live API or offline
+database returns relevant weather matrices.
+
+Pass
+
+TC09
+
+Weather
+
+Interrogate
+the
+system HTTP 200 OK; apalerts
+channel
+via
+GET plication
+identifies
+/api/weather/alerts
+and parses any active
+location tagged with
+is extreme.
+
+Pass
+
+TC10
+
+Advisory
+
+Transmit
+GET HTTP 200 OK; the
+/api/advisory?crop=Rice&season=Kharif
+database applies bidistructural queries
+rectional
+filtering
+to extract specific
+operational advice.
+
+Pass
+
+TC11
+
+Advisory
+
+Farmer
+fires
+GET HTTP 200 OK; logic
+/api/advisory/for-farmer
+seamlessly
+extracts
+carrying an authenticated token user profile preferences, yielding bespoke
+data without manual
+filters.
+
+Pass
+
+TC12
+
+Queries
+
+Initiating
+a
+POST HTTP 201 Created; a
+/api/queries
+workflow relational query record
+while transmitting a farmer JWT is initialized under an
+explicitly pending status.
+
+Pass
+
+Expected Outcome
+
+Status
+
+Continued on next page
+
+31
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Table 9.1 – Continued from previous page
+TC ID
+
+Module
+
+Testing Input or Action
+
+Expected Outcome
+
+Status
+
+TC13
+
+Queries
+
+Administrator executes a PUT
+/api/queries/:id/respond
+command bridging an answer
+string
+
+HTTP 200 OK; the
+database securely updates the targeted query
+ticket with the expert
+answer.
+
+Pass
+
+TC14
+
+Farmers
+
+Initiating
+a
+GET
+/api/farmers/me using an
+established farmer JWT authentication string
+
+HTTP 200 OK; the persistence tier locates and
+serves the specific localized user profile arrays.
+
+Pass
+
+TC15
+
+Stats
+
+Initiating an authorized dash- HTTP 200 OK; comboard GET /api/stats action prehensive
+database
+sequence
+summarizations, counters, and extreme alert
+indices are provided.
+
+Pass
+
+9.3
+
+Boundary and Negative Test Cases
+
+Negative testing aggressively challenges the software paradigm, assessing whether the logic
+accurately catches, prevents, or bypasses intentional structural violations or deliberate resource deprivations without triggering fatal system crashes.
+Table 9.2: Boundary and Negative Scenario Emulations
+TC ID
+
+Category
+
+Scenario Input Description
+
+Expected
+Outcome
+
+TC16
+
+Security
+
+Request
+submitted
+targeted
+closely at a protected routing
+endpoint totally lacking an HTTP
+Authorization bearer token
+string.
+
+The core router blocks
+progress, universally
+returning HTTP 401
+Unauthorized.
+
+Structural
+
+Continued on next page
+
+32
+
+Table 9.2 – Continued from previous page
+TC ID
+
+Category
+
+Scenario Input Description
+
+TC17
+
+Fallback
+
+Deliberately trigger weather data The connection dynamcompilation with a malformed or ically fails over to the
+omitted external API key.
+persistence layer, rendering offline database
+fallback data via HTTP
+200.
+
+TC18
+
+Routing
+
+User executes a GET command tar- Unroutable parameters
+geting /api/nonexistent struc- terminate gracefully;
+tural paths.
+the system replies
+strictly returning a
+generic HTTP 404 Not
+Found error.
+
+TC19
+
+Consistency Command dispatched to POST
+/api/auth/farmer/register
+forcefully injecting an identical
+phone number already mapped.
+
+TC20
+
+Escalation
+
+Structural
+
+Relational rules forbid
+duplication;
+handler
+accurately triggers an
+HTTP 409 Conflict
+protocol.
+
+Basic-tier Farmer attempts to uti- Authorization interceplize a valid token to perform POST tors actively analyze the
+/api/admins.
+token hierarchy, preventing administrative
+escalation by returning
+HTTP 403.
+
+Chapter 10:
+
+10.1
+
+Expected
+Outcome
+
+Deployment Plan
+
+Deployment Environment
+
+Transitioning the Digital Farmer Assistance System from a local development environment
+to a robust production infrastructure assumes several baseline environmental prerequisites to
+33
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+maintain continuous operational stability.
+• Operating System: A stable Linux distribution (preferably Ubuntu 22.04 LTS or
+newer) is strongly recommended for the deployment staging environment, providing
+optimal security patching protocols.
+• Runtime Configuration: The host server must possess a dedicated installation of
+Node.js v18 LTS (or greater).
+• Database Architecture: The persistence layer utilizes MySQL 8.0+. While a native
+local instance is permissible for prototyping, a managed cloud database solution (e.g.,
+PlanetScale or AWS RDS) is aggressively recommended for production environments
+to handle automated backups.
+• Web Server / Reverse Proxy: The native Express.js process exclusively handles
+HTTP routing and serves static layout files from the public/ directory. For productiontier deployment, an Nginx reverse proxy layer is strictly advised to correctly terminate
+SSL certificates via certbot and port-forward requests securely.
+10.2
+
+Local Deployment Steps
+
+Initializing a development or localized testing environment requires the sequential execution
+of the following rigid configurational mandates:
+1. Prerequisite Acquisition: Ensure comprehensive installations of Node.js v18+ and
+MySQL 8.0 exist on the local workstation.
+2. Repository Cloning: Extract or clone the project source files into a securely designated directory and navigate into the project root via terminal. Execute npm install
+to rapidly resolve all NPM package dependencies listed in package.json.
+3. Environment Contextualization: Copy the standardized .env.example template
+via terminal command cp .env.example .env. Securely populate the newly generated .env file configurations, specifically overriding DB PASSWORD, JWT SECRET,
+PORT, and the external WEATHER API KEY.
+4. Schema Provisioning: Initialize the raw database schema and seed demonstration
+entities by executing: mysql -u root -p < schema.sql.
+5. Server Ignition: Launch the primary Node.js thread by executing node server.js.
+The server will output a successful connection heuristic console string.
+6. Client Access: Navigate any standard web browser cleanly to http://localhost:3000
+to render the frontend portal interface.
+34
+
+10.3
+
+Cloud Deployment Implementation
+
+Deploying the platform for continuous, broad internet accessibility involves abstracting local
+prerequisites into managed cloud architectures.
+• PaaS Platform Selection: Low-friction Platform as a Service (PaaS) providers—such
+as Railway.app, Render.com, or Fly.io—are targeted. These services natively incorporate Node.js containerization.
+• Secrets Management: Raw configuration parameters natively stored in .env files locally are meticulously transcribed directly into the selected cloud provider’s encrypted
+environment variable dashboard to ensure rigid repository security.
+• Managed Database Strategies: The schema persistence tier is dynamically hosted
+using managed Database-as-a-Service providers like AWS RDS Free Tier or direct
+planetScale integrations to assure continuous uptime.
+10.4
+
+Ongoing System Maintenance
+
+Sustained operability dictates rigorous application maintenance post-deployment.
+• Cryptographic Rotation: The JWT SECRET key will undergo periodic cyclical rotation. Updating the environment variable and cycling the node service automatically
+invalidates old tokens forcing a security login refresh.
+• API Key Monitoring: The external OpenWeatherMap API key (capped at the free
+tier of 60 calls/min) must be continually monitored via provider dashboards to detect
+latency throttling heuristics.
+• Data Integrity: Standardized database backups shall be scheduled via external mysqldump
+cron jobs protecting against catastrophic persistence failure.
+
+Chapter 11:
+
+11.1
+
+Reflection and Learning Outcomes
+
+Challenges Faced
+
+The conception and execution of the Digital Farmer Assistance System introduced several
+technical and structural challenges requiring meticulous engineering solutions.
+
+35
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+• Resolving Requirements Ambiguities: The initial problem statement possessed significant ambiguities surrounding the subjective definition of ”timely access” and the
+physical geographic boundaries dictating regional market scopes. Significant time
+was expended systematically translating undefined variables into strictly measurable
+operational metrics.
+• Offline Durability vs. Live Data: A fundamental tension existed between capturing
+highly volatile, real-time external API meteorological data and acknowledging the
+harsh reality of an inherently unstable internet connectivity ecosystem in rural India.
+Designing a seamless, transparent database fallback caching mechanism that bypassed
+API failures without crashing the UI proved technically demanding.
+• Authorization Scoping: Constructing a strictly rigid role-based access control paradigm
+separating general Farmers from highly privileged Administrators (and underlying Superadmins) necessitated complex JSON Web Token payload structuring. Establishing
+routing middleware capable of actively reading token roles and rejecting unauthorized
+execution paths required careful debugging.
+• Database-Level Localization: Developing a dynamic multilingual capability strictly
+using database language attribute flags—purposefully omitting bloated applicationlayer localization libraries (like i18n)—required heavily indexing specific querying
+routines to ensure the system efficiently filtered distinct linguistic payloads seamlessly
+based on farmer profile preferences.
+• Mobile-First Simplicity: Designing an intrinsically simplistic HTML UI optimized
+aggressively for populations demonstrating low digital literacy forced a radical simplification of traditional web patterns, omitting complex JavaScript layouts in favor of
+raw, high-contrast, linear dashboard cards.
+11.2
+
+Client Interaction and Requirement Elicitation
+
+The preliminary client requirement gathering sessions effectively highlighted the pervasive
+gap between abstract business objectives and concrete software mechanics. Initial conversations simply demanded ”a better tool for farmers.” Extracting functional constraints—defining
+exactly what the tool must not do—was vital. By iteratively challenging the vagueness embedded within the first draft of the problem statement, the development team explicitly documented the precise need for fallback scenarios and strict multilingual support, ultimately
+transforming vague assertions into actionable, engineered tasks.
+11.3
+
+Lessons Learned
+
+The engineering lifecycle continuously underscored vital software engineering dictums.
+36
+
+• Rework Mitigation: Early, aggressive requirements clarification unambiguously prevented mathematically expensive codebase rewrites by firmly establishing the structural scope prior to executing a single line of backend logic.
+• Architectural Separation: Committing rigorously to a four-layer software architecture unambiguously simplified complex unit testing processes and allowed UI alterations completely independent of structural database operations.
+• Parametrized Security: Hard-coding parameterized SQL variables across all structural queries is utterly non-negotiable; ignoring strict data sanitization inevitably exposes the entire platform to trivial SQL injection compromise parameters.
+• UML Efficacy: Utilizing abstract Use Case and Class diagrams effectively translated isolated technical schemas into easily digestible communicable data points understandable globally by the development team.
+11.4
+
+Learning Outcomes
+
+Directly mapped to the explicit objectives of the Micro Project syllabus, the undertaking
+provided profound practical experience. The endeavor systematically applied all paramount
+phases of the Software Development Life Cycle (SDLC)—from initial requirement elicitation and extensive feasibility analyses to deep backend coding, integration testing, and simulated cloud deployment configurations. The team acquired intense, hands-on architectural
+experience meticulously designing RESTful APIs, securing JSON Web Token networks, and
+administering raw MySQL queries within an asynchronous execution context. Ultimately,
+the project generated a profound appreciation for evaluating rigid software design patterns
+
+37
+
+acting as the foundational bedrock for scalable, reliable full-stack web applications.
+
+References
+
+Bibliography
+
+[1] Pressman, R.S. and Maxim, B.R., Software Engineering: A Practitioner’s Approach,
+9th ed., McGraw-Hill Education, 2020.
+[2] Sommerville, I., Software Engineering, 10th ed., Pearson Education, 2016.
+[3] OpenWeatherMap, “API Documentation,” https://openweathermap.org/api.
+[Online]. Accessed: 2024.
+[4] OpenJS Foundation, “Express.js Documentation,” https://expressjs.com. [Online]. Accessed: 2024.
+[5] Oracle Corporation, “MySQL 8.0 Reference Manual,” https://dev.mysql.com/
+doc/. [Online]. Accessed: 2024.
+[6] Auth0, “Introduction to JSON Web Tokens,” https://jwt.io/introduction. [Online]. Accessed: 2024.
+[7] United Nations, “Sustainable Development Goals,” https://sdgs.un.org/goals.
+[Online]. Accessed: 2024.
+[8] Fowler, M., Patterns of Enterprise Application Architecture, Addison-Wesley, 2002.
+
+Chapter A:
+
+Product Screenshots
+
+This appendix presents visual representations of the Digital Farmer Assistance System interface and backend architecture. These screenshots demonstrate the core functionalities
+38
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+implemented to fulfill the project’s requirements.
+
+Figure A.1: Farmer Login Interface: Mobile-first phone number and password authentication form.
+
+Figure A.2: Admin Login Interface: Email and password form mapped exclusively for administrator user access tracking.
+
+39
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Figure A.3: Farmer Dashboard: Unified data stream rendering specific crop advisories, an
+integrated 5-day weather forecast, and local market price summary cards.
+
+Figure A.4: Market Prices Module: Searchable and highly filterable data table rendering
+recent crop prices tagged with the active date and source market coordinates.
+
+40
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Figure A.5: Weather Module: Rendered 5-day localized weather sequence showcasing the
+automated alert banners dynamically triggered by external extreme weather metric flags.
+
+Figure A.6: Crop Advisory Module: Rendered layout featuring season-filtered advisory content dynamically leveraging the application’s native multilingual database translation labels.
+
+41
+
+Digital Farmer Assistance System
+
+PECST411 — SE Micro Project
+
+Figure A.7: Query Submission Form: Interactive module utilized by farmers to directly
+submit agricultural issue reports explicitly requesting expert administrative resolutions.
+
+Figure A.8: Admin Panel Architecture: Backend CRUD (Create, Read, Update, Delete)
+portal exclusively used by administrative profiles to constantly manage advisory flows and
+market price points.
+
+42
+
+

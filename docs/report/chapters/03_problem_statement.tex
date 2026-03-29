@@ -1,29 +1,29 @@
-\section{Initial Problem Statement}
+\subsection{Initial Problem Statement}
 Farmers currently lack timely and reliable access to localised crop advisory, real-time market prices, and critical weather information. This profound information gap results in inefficient farming practices, significantly reduced crop yields, and increased financial vulnerability due to unpredictable market volatility and increasingly erratic weather patterns. Without a centralized, accessible platform to consolidate this disparate data, decision-making remains reactive rather than data-driven, severely limiting the economic mobility and operational resilience of small-scale agricultural communities.
 
 \sectionsection{Ambiguities, Inconsistencies, and Incompleteness Identified}
 Upon critical evaluation of the initial problem statement, several substantial flaws and areas requiring clarification were identified. Formalizing the software requirements necessitated a thorough deconstruction of these issues.
 
-\subsection*{Ambiguities}
+\subsubsection*{Ambiguities}
 \begin{itemize}
     \item The phrase \textit{``timely access''} is overly subjective and lacks measurable criteria. It does not specify whether the updates should be provided in real-time (instantaneously), on an hourly basis, or via a daily batch process.
     \item The term \textit{``market prices''} fails to define the geographic scope of the data. It is ambiguous whether the system should aggregate national commodity exchange rates, state-level averages, or prices from highly localized regional \textit{mandis} (markets).
 \end{itemize}
 
-\subsection*{Inconsistencies}
+\subsubsection*{Inconsistencies}
 \begin{itemize}
     \item The initial statement emphasizes \textit{``reliable access''} but provides no mechanism for how the data (especially crowdsourced or admin-entered advisories) will be vetted, validated, or maintained for data integrity.
     \item There is a contradiction involving the target demographic: asserting the need for constant access to live data while implicitly serving rural areas known for intermittent and unreliable internet connectivity. No offline or low-bandwidth strategy was explicitly detailed.
     \item Although the system aims to improve farmers' financial standing, there is no mention of the secure handling of their personal and geographic profiles, leading to inconsistent application of data privacy standards.
 \end{itemize}
 
-\subsection*{Incompleteness}
+\subsubsection*{Incompleteness}
 \begin{itemize}
     \item The requirement for \textit{``weather information''} does not specify the delivery mechanism—whether alerts require the user to actively check the platform or if the system will passively push automated warnings to the user during extreme meteorological events.
     \item The problem statement ignores the multilingual necessity of the target audience. Presenting complex agricultural data solely in English would render the platform unusable for the majority of the intended user base.
 \end{itemize}
 
-\section{Refined Problem Statement}
+\subsection{Refined Problem Statement}
 Addressing the identified shortcomings, the problem statement was systematically restructured to provide clear, actionable, and measurable engineering objectives.
 
 \textbf{Refined Problem Statement:} To design, develop, and deploy a secure, web-based Digital Farmer Assistance System that centralises disparate agricultural data streams. The system must provide:

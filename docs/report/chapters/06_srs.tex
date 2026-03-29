@@ -1,7 +1,7 @@
-\section{System Overview}
+\subsection{System Overview}
 The Digital Farmer Assistance System operates as an integrated web-based platform specifically designed to deliver vital agricultural support mechanisms to rural farmers. The software centralizes critical datasets, offering a cohesive portal providing three primary services: dynamic crop advisory mechanisms, verified regional market pricing tracking, and localized meteorological forecasting. The ecosystem is meticulously administered and curated by a dedicated content management team composed of agricultural experts operating via a specialized secure admin control panel. The system effectively mitigates the rural information deficit by providing an accessible, mobile-first centralized dashboard engineered specifically for low-bandwidth cellular environments.
 
-\section{System Features}
+\subsection{System Features}
 The software's functional scope is demarcated into distinct features, detailing operational capabilities provided to the designated users.
 
 \begin{enumerate}
@@ -18,22 +18,7 @@ The software's functional scope is demarcated into distinct features, detailing 
     \item \textbf{Expert Interaction Module (FR6):} To solve unique agricultural challenges not addressed by static advisories, a bidirectional query interface allows farmers to submit free-text questions. Specialized administrative users act as subject matter experts, directly responding to and resolving farmer inquiries through a managed ticket queue system.
 \end{enumerate}
 
-\section{External Interface Requirements}
-The software depends on specialized interfaces to securely manipulate external datasets and reliably interact with end-users.
-
-\subsection*{User Interfaces}
-The primary frontend interface strictly utilizes responsive HTML5, CSS3, and modern Vanilla JavaScript, specifically designed to dynamically adapt to varying viewport sizes. The "mobile-first" approach is essential as smartphones represent the primary internet access methodology for the target demographic. The interface employs high-contrast iconography and unambiguous navigation mechanics to circumvent digital literacy barriers.
-
-\subsection*{Hardware Interfaces}
-The software framework boasts extreme hardware agnosticism regarding the client-side. The application does not require specialized native hardware capabilities; it flawlessly executes on any commercial smartphone, tablet, or traditional computer equipped with a modern HTML5-compliant web browser. 
-
-\subsection*{Software Interfaces}
-The primary software interfaces revolve around external data ingestion and persistence. The system communicates bidirectionally via HTTPS utilizing RESTful JSON structures with the OpenWeatherMap API for live meteorological data ingestion. Internally, the Node.js runtime leverages the \texttt{mysql2} pipeline interface to communicate executing queries securely with the MySQL 8.0 relational database engine.
-
-\subsection*{Communication Interfaces}
-All external client-server communication channels transmit exclusively over encrypted HTTPS connections. Authentication and session persistence are stateless, handled entirely via standard JSON Web Tokens (JWT) transmitted as Bearer tokens embedded within the HTTP \texttt{Authorization} header for all protected API route endpoints.
-
-\section{Assumptions}
+\subsection{Assumptions}
 The successful execution and operation of the software architecture are predicated upon several foundational assumptions regarding user environments and technical dependencies.
 \begin{enumerate}
     \item Users will operate within environments with at least intermittent, low-bandwidth internet connectivity. Total offline scenarios rely strictly on previously cached database fallback mechanisms but necessitate occasional synchronization.
@@ -42,7 +27,7 @@ The successful execution and operation of the software architecture are predicat
     \item While the external Weather API key is optimal for live forecasting, its absence is not catastrophic; the system assumes a highly functional offline or static demonstration mode is permanently configured.
 \end{enumerate}
 
-\section{Constraints}
+\subsection{Constraints}
 Constraints define structural boundaries that limit developmental options or restrict operational methodologies.
 \begin{enumerate}
     \item The software scope is strictly confined to a web-based architecture. The development of distinct native iOS or Android mobile applications is explicitly excluded from the current phase.

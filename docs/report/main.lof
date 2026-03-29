@@ -1,25 +1,11 @@
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Four-Layer Architecture of the System}}{22}{figure.caption.2}%
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces System Use Case Diagram}}{26}{figure.caption.4}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces System Class Diagram}}{28}{figure.caption.5}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces System Home Page: Landing screen showing standard market prices, daily weather summary, and unified navigation menu components.}}{45}{figure.caption.9}%
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Farmer Login Interface: Mobile-first phone number and password authentication form.}}{46}{figure.caption.10}%
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Admin Login Interface: Email and password form mapped exclusively for administrator user access tracking.}}{46}{figure.caption.11}%
-\contentsline {figure}{\numberline {A.4}{\ignorespaces Farmer Dashboard: Unified data stream rendering specific crop advisories, an integrated 5-day weather forecast, and local market price summary cards.}}{47}{figure.caption.12}%
-\contentsline {figure}{\numberline {A.5}{\ignorespaces Market Prices Module: Searchable and highly filterable data table rendering recent crop prices tagged with the active date and source market coordinates.}}{47}{figure.caption.13}%
-\contentsline {figure}{\numberline {A.6}{\ignorespaces Weather Module: Rendered 5-day localized weather sequence showcasing the automated alert banners dynamically triggered by external extreme weather metric flags.}}{48}{figure.caption.14}%
-\contentsline {figure}{\numberline {A.7}{\ignorespaces Crop Advisory Module: Rendered layout featuring season-filtered advisory content dynamically leveraging the application's native multilingual database translation labels.}}{48}{figure.caption.15}%
-\contentsline {figure}{\numberline {A.8}{\ignorespaces Query Submission Form: Interactive module utilized by farmers to directly submit agricultural issue reports explicitly requesting expert administrative resolutions.}}{49}{figure.caption.16}%
-\contentsline {figure}{\numberline {A.9}{\ignorespaces Admin Panel Architecture: Backend CRUD (Create, Read, Update, Delete) portal exclusively used by administrative profiles to constantly manage advisory flows and market price points.}}{49}{figure.caption.17}%
-\contentsline {figure}{\numberline {A.10}{\ignorespaces Database Schema Verification Output: Visual snapshot confirming proper MySQL relational deployment, outlining foreign key constraint interactions across all six primary tables.}}{50}{figure.caption.18}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Four-Layer Architecture of the System}}{15}{figure.caption.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces System Use Case Diagram}}{18}{figure.caption.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces System Class Diagram}}{19}{figure.caption.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Farmer Login Interface: Mobile-first phone number and password authentication form.}}{29}{figure.caption.5}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Admin Login Interface: Email and password form mapped exclusively for administrator user access tracking.}}{30}{figure.caption.6}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Farmer Dashboard: Unified data stream rendering specific crop advisories, an integrated 5-day weather forecast, and local market price summary cards.}}{30}{figure.caption.7}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Market Prices Module: Searchable and highly filterable data table rendering recent crop prices tagged with the active date and source market coordinates.}}{30}{figure.caption.8}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Weather Module: Rendered 5-day localized weather sequence showcasing the automated alert banners dynamically triggered by external extreme weather metric flags.}}{30}{figure.caption.9}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Crop Advisory Module: Rendered layout featuring season-filtered advisory content dynamically leveraging the application's native multilingual database translation labels.}}{31}{figure.caption.10}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Query Submission Form: Interactive module utilized by farmers to directly submit agricultural issue reports explicitly requesting expert administrative resolutions.}}{31}{figure.caption.11}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Admin Panel Architecture: Backend CRUD (Create, Read, Update, Delete) portal exclusively used by administrative profiles to constantly manage advisory flows and market price points.}}{31}{figure.caption.12}%

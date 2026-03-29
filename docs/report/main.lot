@@ -1,19 +1,5 @@
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Functional Requirements of the Digital Farmer Assistance System}}{12}{table.3.1}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Non-Functional Requirements of the System}}{13}{table.3.2}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces System Module Design Mapping}}{23}{table.6.1}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Relational Database Schema Definition}}{24}{table.caption.3}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {8.1}{\ignorespaces Primary Third-Party Dependencies}}{31}{table.caption.6}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {9.1}{\ignorespaces System Functional Test Cases}}{35}{table.9.1}%
-\contentsline {table}{\numberline {9.2}{\ignorespaces Boundary and Negative Scenario Emulations}}{37}{table.9.2}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {1}{\ignorespaces Functional Requirements of the Digital Farmer Assistance System}}{10}{table.1}%
+\contentsline {table}{\numberline {2}{\ignorespaces System Module Design Mapping}}{16}{table.2}%
+\contentsline {table}{\numberline {3}{\ignorespaces Primary Third-Party Dependencies}}{21}{table.caption.4}%
+\contentsline {table}{\numberline {4}{\ignorespaces System Functional Test Cases}}{24}{table.4}%
+\contentsline {table}{\numberline {5}{\ignorespaces Boundary and Negative Scenario Emulations}}{25}{table.5}%

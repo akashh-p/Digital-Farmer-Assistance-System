@@ -1,7 +1,12 @@
-\section{Use Case Diagram}
+\subsection{Use Case Diagram}
 The Use Case Diagram visually describes the behavioral capabilities of the Digital Farmer Assistance System from the perspective of its primary actors. This diagram ensures that all high-level functional requirements defined in the SRS are adequately accounted for by corresponding system interactions.
 
-\imgplaceholder{14}{10}{System Use Case Diagram}{usecase}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/usecase.jpg}
+    \caption{System Use Case Diagram}
+    \label{fig:usecase}
+\end{figure}
 
 \textbf{Actors:}
 \begin{itemize}
@@ -30,21 +35,26 @@ The Use Case Diagram visually describes the behavioral capabilities of the Digit
     \end{itemize}
 \end{enumerate}
 
-\section{Class Diagram}
+\subsection{Class Diagram}
 The Class Diagram delineates the structural framework of the software, explicitly defining system objects, their attributes, behavioral methods, and their inter-relationships, thereby bridging the conceptual design into actionable object-oriented engineering strategies.
 
-\imgplaceholder{14}{12}{System Class Diagram}{classdiagram}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/classdiagram.png}
+    \caption{System Class Diagram}
+    \label{fig:classdiagram}
+\end{figure}
 
 \textbf{Core Class Definitions:}
 \begin{itemize}
     \item \texttt{User} (Abstract Base Class): Centralizes common authentication attributes (\texttt{userID}, \texttt{name}, \texttt{passwordHash}) and core methods (\texttt{login()}, \texttt{logout()}).
     \item \texttt{Admin}: Inherits \texttt{User}. Attributes include \texttt{adminRole}. Methods encompass authoritative interactions: \texttt{createAdvisory()}, \texttt{updateMarketPrice()}, and \texttt{respondToQuery()}.
-    \item \texttt{Farmer}: Inherits \texttt{User}. Extends base class with \texttt{region} and \texttt{preferredCrops}. Specialized methodologies comprise \texttt{viewAdvisory()}, \texttt{checkMarketPrice()}, and \texttt{getWeatherForecast()}.
-    \item \texttt{UserProfile}: Managed via composition by the \texttt{Farmer} class. Contains specific metadata including \texttt{languagePreference} and \texttt{phoneNumber}, manipulatable via \texttt{updateProfile()}.
+    \item \texttt{Farmer}: Inherits \texttt{User}. Extends base class with \texttt{region} and \texttt{preferredCrops}. Specialized methodologies comprise \texttt{viewAdvisory()}, \texttt{checkMarketPrice()}, and \texttt{getWeather\-Forecast()}.
+    \item \texttt{UserProfile}: Managed via composition by the \texttt{Farmer} class. Contains specific metadata including \texttt{language\-Preference} and \texttt{phone\-Number}, manipulatable via \texttt{update\-Profile()}.
     \item \texttt{Advisory}: Encapsulates structural data: \texttt{advisoryID}, \texttt{cropType}, \texttt{season}, \texttt{content}. Accessible via \texttt{getAdvisoryDetails()}.
     \item \texttt{Query}: Represents the interaction state: \texttt{queryID}, \texttt{subject}, \texttt{status}, and \texttt{response}, handled via \texttt{submitQuery()} and \texttt{updateStatus()}.
     \item \texttt{MarketPrice} \& \texttt{WeatherForecast}: Abstraction layers handling external data synchronization, tracking \texttt{sourceMarket}, \texttt{currentPrice}, \texttt{temperature}, and \texttt{weatherCondition}.
 \end{itemize}
 
 \textbf{Strategic Relationships:}
-The software strictly employs hierarchical \textit{inheritance} for shared user functionality (Farmer/Admin $\leftarrow$ User). It mandates strong \textit{composition} mapping between the Farmer and their UserProfile (Farmer $\diamond\rightarrow$ UserProfile). Looser \textit{dependency} and \textit{association} relationships govern the dynamic interactions between the Farmer modules and rapidly volatile external data objects (Farmer $\dashrightarrow$ MarketPrice).
+The software strictly employs hierarchical \textit{inheritance} for shared user functionality (Farmer/Admin $\leftarrow$ User). It mandates strong \textit{composition} mapping between the Farmer and their UserProfile (Farmer $\diamond\rightarrow$ UserProfile). Looser \textit{dependency} and \textit{association} relationships govern the dynamic interactions between the Farmer modules and rapidly volatile external data objects (Farmer $-\!-\!>$ MarketPrice).

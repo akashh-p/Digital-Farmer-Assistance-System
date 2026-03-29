@@ -1,10 +1,10 @@
-\section{Architectural Overview}
+\subsection{Architectural Overview}
 The Digital Farmer Assistance System purposefully adopts a formal \textbf{four-layer software architecture}, establishing an explicit separation of computing concerns throughout the application stack. This structural design isolates the user interface semantics from the volatile business logic and raw data persistence layers. This separation fundamentally guarantees that alterations to the frontend HTML layouts or database schema structures will not necessitate cascading, breaking changes across the entire monolithic codebase. This architecture ultimately facilitates cleaner unit testability, highly streamlined debugging, and vastly superior post-deployment maintenance.
 
-\section{Architecture Diagram}
+\subsection{Architecture Diagram}
 The functional flow of data between the four primary operational layers is visually formalized via the following structured architectural diagram. Top-down requests initialize logic rendering, while bottom-up cascades fulfill data persistence queries.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}[
   layer/.style={draw, thick, rounded corners, fill=green!8,
@@ -29,10 +29,10 @@ The functional flow of data between the four primary operational layers is visua
 \label{fig:architecture}
 \end{figure}
 
-\section{Module Design}
+\subsection{Module Design}
 The system logically divides complex backend requirements into distinct, deployable modules, mapped explicitly to discrete implementation files in the codebase.
 
-\begin{longtable}{>{\bfseries}p{3cm} p{6cm} p{5.5cm}}
+\begingroup\footnotesize\begin{longtable}{>{\bfseries}p{0.2\textwidth} p{0.4\textwidth} p{0.35\textwidth}}
 \caption{System Module Design Mapping} \label{tab:module_design} \\
 \toprule
 Layer & Module & Implementation File \\
@@ -59,41 +59,13 @@ Integration & Market Price Integration Module & \texttt{routes/market.js} \\
 Integration & Weather Service Module & \texttt{routes/weather.js} (OWM API $\rightarrow$ DB $\rightarrow$ mock) \\
 Data Access & Data Persistence Module & \texttt{db.js} (mysql2 connection pool) \\
 Data Access & Content Management Module & Admin CRUD controllers across all route files \\
-\end{longtable}
+\end{longtable}\endgroup
 
 \textbf{Module Description Summary:} The Presentation Layer dictates responsive HTML layouts and processes DB translation strings. The Business Logic layer contains primary logic controllers determining weather alert calculations and advisory payload generation. The Integration layer contains networking abstractions specifically focused on third-party API processing and JWT validation mechanisms. Finally, the Data Access Layer universally handles optimized SQL query execution directly to the MySQL cluster.
 
-\section{Database Schema}
-The persistence module is rigorously normalized to minimize data redundancy anomalies across six primary relational tables.
-
-\begin{table}[H]
-\centering
-\renewcommand{\arraystretch}{1.2}
-\caption{Relational Database Schema Definition}
-\label{tab:schema}
-\begin{tabular}{>{\bfseries}p{3.5cm} p{2cm} p{3cm} p{5.5cm}}
-\toprule
-Table Name & Primary Key & Foreign Keys & Notable Columns \\
-\midrule
-ADMIN & admin\_id & --- & name, email, role, password\_hash \\
-FARMER & farmer\_id & --- & name, phone, crops, region, language\_pref \\
-QUERY & query\_id & farmer\_id, admin\_id & subject, description, status, response \\
-ADVISORY & adv\_id & admin\_id & crop\_type, season, language, content \\
-MARKET\_PRICE & price\_id & admin\_id & crop\_name, price, source\_market, date \\
-WEATHER\_FORECAST & fc\_id & --- & location, temp, condition, is\_extreme, date \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\section{Cohesion Analysis}
+\subsection{Cohesion Analysis}
 Cohesion evaluates the degree to which elements inside an individual module belong logically together. The Digital Farmer Assistance System actively enforces functional cohesion, widely regarded as the strongest and most desirable form. The User Management Module is strictly confined to executing authentication strategies and profile mutations; it possesses no capability to process structural advisories. The Weather and Alert module exclusively computes meteorological data and alert algorithms without manipulating agricultural content. This intense functional isolation guarantees vastly superior code readability and ensures individual modules can be autonomously maintained or rewritten entirely without unintended global behavioral degradation.
 
-\section{Coupling Analysis}
+\subsection{Coupling Analysis}
 Coupling measures the degree of functional interdependence or data reliance between discrete modules. Utilizing the layered architectural approach automatically ensures a low coupling environment, predominantly relying exclusively on simple data coupling structures. The UI Presentation Layer is incapable of direct persistence access; it must communicate structurally through the Business Logic Layer. Furthermore, any volatile alterations originating from the OpenWeatherMap API solely influence the isolated Integration module. This protective buffering fundamentally prevents volatile networking changes from polluting or crashing the core database execution models, thereby granting extreme system flexibility and paving an unambiguous path toward future microservices migration if platform scaling demands necessitate such action.
 
-\section{Design Justification}
-\begin{itemize}
-    \item \textbf{High Scalability:} By actively deploying a rigidly layered architecture, the backend routing and logic structures are perfectly optimized for future migrations, easily accommodating cloud-native XaaS (Everything as a Service) operations or Docker-based horizontal scaling configurations.
-    \item \textbf{Superior Maintainability:} Critical corrective or perfective maintenance cycles are physically isolated to single targeted layers, mitigating the risk of introducing widespread functionality regressions during routine updates.
-    \item \textbf{Operational Reliability:} Complete structural decoupling between the external ingestion integrations and internal frontend render operations ensures that latency spikes or total failures in third-party API dependencies will not fundamentally freeze the localized user interface processes.
-\end{itemize}
